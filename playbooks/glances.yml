@@ -1,0 +1,12 @@
+- name: Glances
+  community.docker.docker_container:
+    name: glances
+    image: nicolargo/glances
+    state: started
+    pid_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    env:
+      GLANCES_OPT: "-w"
+    labels:
+      traefik.enable: "true"

@@ -1,0 +1,50 @@
+---
+- name: Traefik
+  community.docker.docker_container:
+    name: traefik
+    image: traefik:v2.6.0
+    restart_policy: unless-stopped
+    state: started
+    security_opts:
+      - no-new-privileges:true
+    volumes:
+      - '{{ docker_data_dir }}/traefik/acme.json:/acme.json'
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command_handling: correct
+    command:
+      - '--global.sendAnonymousUsage'
+      - '--log.level=INFO'
+      - '--entrypoints.web.address=:80'
+      - '--entrypoints.websecure.address=:443'
+      - '--entrypoints.websecure.http.tls.certresolver=cloudflare'
+      - '--entrypoints.websecure.http.tls.domains[0].main={{ docker_hostname }}'
+      - '--entrypoints.websecure.http.tls.domains[0].sans=*.{{ docker_hostname }}'
+      - '--providers.docker=true'
+      - '--providers.docker.endpoint=unix:///var/run/docker.sock'
+      - '--providers.docker.swarmMode=false'
+      - '--providers.docker.defaultrule=Host(`{{ "{{ normalize .Name }}" }}.{{ docker_hostname }}`)'
+      - '--api'
+      - '--certificatesresolvers.cloudflare.acme.dnschallenge=true'
+      - '--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare'
+      - '--certificatesResolvers.cloudflare.acme.dnsChallenge.resolvers=1.1.1.1:53,1.0.0.1:53'
+      - '--certificatesresolvers.cloudflare.acme.storage=/acme.json'
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    env:
+      CF_API_KEY: '{{ cloudflare_api_key }}'
+      CF_API_EMAIL: '{{ cloudflare_email }}'
+    labels:
+      # global redirect to https
+      traefik.http.routers.http-catchall.rule: 'hostregexp(`{host:.+}.{{ docker_hostname }}`)'
+      traefik.http.routers.http-catchall.entrypoints: 'web'
+      traefik.http.routers.http-catchall.middlewares: 'redirect-to-https'
+      traefik.http.middlewares.redirect-to-https.redirectscheme.scheme: 'https'
+
+      # dashboard
+      traefik.http.routers.traefik.rule: 'Host(`traefik.{{ docker_hostname }}`)'
+      traefik.http.routers.traefik.tls: 'true'
+      traefik.http.routers.traefik.entrypoints: 'websecure'
+      traefik.http.routers.traefik.service: 'api@internal'
+

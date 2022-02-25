@@ -1,0 +1,6 @@
+---
+- hosts: philcoulson
+  tasks:
+    - include_tasks: playbooks/traefik.yml
+    - include_tasks: playbooks/glances.yml
+    - include_tasks: playbooks/dozzle.yml
