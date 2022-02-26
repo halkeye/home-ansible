@@ -3,5 +3,5 @@
 [amd64]
 philcoulson
 
-#[nas]
-#synologynas
+[nas]
+synologynas

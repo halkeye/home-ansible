@@ -1,5 +1,16 @@
 ---
+- hosts: synologynas
+  gather_facts: False
+  tasks:
+    - include_tasks: playbooks/traefik.yml
+    - include_tasks: playbooks/glances.yml
+    - include_tasks: playbooks/dozzle.yml
+    - include_tasks: playbooks/syncthings.yml
+    - include_tasks: playbooks/netbootxyz.yml
+    - include_tasks: playbooks/plex.yml
+    - include_tasks: playbooks/qbittorrent.yml
 - hosts: philcoulson
+  gather_facts: False
   tasks:
     - include_tasks: playbooks/traefik.yml
     - include_tasks: playbooks/glances.yml

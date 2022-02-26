@@ -28,6 +28,7 @@
       - '--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare'
       - '--certificatesResolvers.cloudflare.acme.dnsChallenge.resolvers=1.1.1.1:53,1.0.0.1:53'
       - '--certificatesresolvers.cloudflare.acme.storage=/acme.json'
+      - '--pilot.token={{ traefik_pilot_key | default ("") }}'
     ports:
       - 80:80
       - 443:443

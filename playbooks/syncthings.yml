@@ -1,0 +1,16 @@
+- name: syncthing
+  community.docker.docker_container:
+    name: syncthing
+    image: lscr.io/linuxserver/syncthing
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "American/Vancouver"
+    volumes:
+      - '{{ docker_config_dir }}/syncthing:/config'
+      - '{{ docker_data_dir }}/syncthing/data1:/data1'
+      - '{{ docker_data_dir }}/syncthing/data2:/data2'
+    restart_policy: unless-stopped
+    labels:
+      traefik.enable: 'true'
+

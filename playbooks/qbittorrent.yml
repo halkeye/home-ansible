@@ -1,0 +1,21 @@
+- name: qbittorrent
+  community.docker.docker_container:
+    name: qbittorrent
+    image: guillaumedsde/alpine-qbittorrent-openvpn:latest
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "American/Vancouver"
+      OPENVPN_PASSWORD: '{{ qbittorrent.openvpn.password }}'
+      OPENVPN_USERNAME: '{{ qbittorrent.openvpn.username }}'
+      OPENVPN_CONFIG: '{{ qbittorrent.openvpn.config }}'
+      OPENVPN_PROVIDER: '{{ qbittorrent.openvpn.provider }}'
+    volumes:
+      - '{{ docker_config_dir }}/qbittorrent:/config'
+      - '{{ docker_data_dir }}/torrents:/download'
+      - '{{ docker_data_dir }}/torrents:/torrents'
+    restart_policy: unless-stopped
+    capabilities:
+      - NET_ADMIN
+    labels:
+      traefik.enable: 'true'

@@ -1,0 +1,10 @@
+---
+ansible_connection: ssh
+ansible_ssh_user: halkeye
+ansible_ssh_port: 4022
+
+docker_hostname: nas.g4v.dev
+docker_config_dir: /volume1/docker
+docker_data_dir: /volume1/Apps
+
+
