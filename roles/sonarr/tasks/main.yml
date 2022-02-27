@@ -2,19 +2,28 @@
   ansible.builtin.file:
     path: '{{ docker_config_dir }}/sonarr'
     state: directory
-    mode: '0755'
+    mode: '0777'
+    owner: '{{ docker_uid }}'
+    group: '{{ docker_gid }}'
+  notify:
+    - Restart sonarr
 
-- set_fact:
+- name: setup sonarr specific volumes
+  set_fact:
     sonarr_config_volumes:
       - '{{ docker_config_dir }}/sonarr:/config'
 
-- set_fact:
+- name: merge common and sonarr volumes
+  set_fact:
     sonarr_volumes: "{{ media_directories + sonarr_config_volumes }}"
+  notify:
+    - Restart sonarr
 
 - name: sonarr
   community.docker.docker_container:
     name: sonarr
     image: ghcr.io/k8s-at-home/sonarr:v3.0.6.1342
+    user: '{{ docker_uid }}'
     env:
       TZ: "American/Vancouver"
     volumes: '{{ sonarr_volumes }}'
