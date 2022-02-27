@@ -3,8 +3,8 @@
     name: qbittorrent
     image: guillaumedsde/alpine-qbittorrent-openvpn:latest
     env:
-      PUID: "1000"
-      PGID: "1000"
+      PUID: '{{ docker_uid | quote }}'
+      PGID: '{{ docker_gid | quote }}'
       TZ: "America/Vancouver"
       OPENVPN_PASSWORD: '{{ qbittorrent.openvpn.password }}'
       OPENVPN_USERNAME: '{{ qbittorrent.openvpn.username }}'

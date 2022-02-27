@@ -4,6 +4,7 @@
     image: ghcr.io/k8s-at-home/nzbget:v21.1
     state: started
     restart_policy: unless-stopped
+    user: '{{ docker_uid }}'
     volumes:
       - '{{ docker_data_dir }}/nzbget:/nzb-downloads'
       - '{{ docker_config_dir }}/nzbget:/config'
