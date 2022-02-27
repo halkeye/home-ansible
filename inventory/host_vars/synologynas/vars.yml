@@ -12,11 +12,15 @@ docker_gid: 100
 media_base_dir: /volume1
 
 media_directories:
+  - '{{ docker_data_dir }}/nzbget:/nzb-downloads'
+  - '{{ docker_data_dir }}/torrents:/torrents'
   - '{{ media_base_dir }}/Anime:/anime'
   - '{{ media_base_dir }}/Anime Movies:/anime-movies'
+  - '{{ media_base_dir }}/Audio/Audio Books:/audiobooks'
+  - '{{ media_base_dir }}/Audio/Music:/music'
+  - '{{ media_base_dir }}/Books:/books'
+  - '{{ media_base_dir }}/Comics:/comics'
   - '{{ media_base_dir }}/Movies:/movies'
   - '{{ media_base_dir }}/TV:/tv'
-  - '{{ media_base_dir }}/Webseries:/webseries'
   - '{{ media_base_dir }}/Webseries Movies:/webseries-movies'
-  - '{{ docker_data_dir }}/torrents:/torrents'
-  - '{{ docker_data_dir }}/nzbget:/nzb-downloads'
+  - '{{ media_base_dir }}/Webseries:/webseries'
