@@ -3,6 +3,7 @@
     name: glances
     image: nicolargo/glances
     state: started
+    auto_remove: true
     pid_mode: host
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro

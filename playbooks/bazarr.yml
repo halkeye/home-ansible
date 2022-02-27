@@ -15,6 +15,7 @@
   community.docker.docker_container:
     name: bazarr
     image: linuxserver/bazarr:version-v1.0.3
+    auto_remove: true
     env:
       PUID: "1000"
       PGID: "1000"

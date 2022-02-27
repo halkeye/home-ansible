@@ -5,6 +5,7 @@
     image: traefik:v2.6.0
     restart_policy: unless-stopped
     state: started
+    auto_remove: true
     security_opts:
       - no-new-privileges:true
     volumes:

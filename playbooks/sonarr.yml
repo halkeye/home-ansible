@@ -15,7 +15,7 @@
   community.docker.docker_container:
     name: sonarr
     image: ghcr.io/k8s-at-home/sonarr:v3.0.6.1342
-    auto_remove: true ## FIXME - copy everywhere
+    auto_remove: true
     env:
       TZ: "American/Vancouver"
     volumes: '{{ sonarr_volumes }}'

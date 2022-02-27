@@ -2,6 +2,7 @@
   community.docker.docker_container:
     name: syncthing
     image: lscr.io/linuxserver/syncthing
+    auto_remove: true
     env:
       PUID: "1000"
       PGID: "1000"
