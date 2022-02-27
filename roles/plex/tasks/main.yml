@@ -5,7 +5,7 @@
     image: plexinc/pms-docker
     network_mode: host
     env:
-      TZ: "American/Vancouver"
+      TZ: "America/Vancouver"
       PLEX_CLAIM: '{{ plex_claim }}'
       CHANGE_CONFIG_DIR_OWNERSHIP: "false"
     volumes:

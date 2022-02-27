@@ -13,9 +13,18 @@
     - nzbget
     - qbittorrent
     # Media Finders
-    - bazarr
-    - sonarr
-    - radarr
+    - role: arrs
+      vars:
+        service_name: bazarr
+        service_image: ghcr.io/k8s-at-home/bazarr:v1.0.3
+    - role: arrs
+      vars:
+        service_name: sonarr
+        service_image: ghcr.io/k8s-at-home/sonarr:v3.0.6.1342
+    - role: arrs
+      vars:
+        service_name: radarr
+        service_image: ghcr.io/k8s-at-home/radarr:v4.0.4.5922
 - hosts: philcoulson
   gather_facts: False
   roles:

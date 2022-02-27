@@ -5,7 +5,7 @@
     env:
       PUID: "1000"
       PGID: "1000"
-      TZ: "American/Vancouver"
+      TZ: "America/Vancouver"
     volumes:
       - '{{ docker_config_dir }}/syncthing:/config'
       - '{{ docker_data_dir }}/syncthing/data1:/data1'

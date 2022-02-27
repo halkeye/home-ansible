@@ -1,4 +1,0 @@
-- name: Restart sonarr
-  community.docker.docker_container:
-    name: sonarr
-    restart: yes

@@ -5,7 +5,7 @@
     env:
       PUID: "1000"
       PGID: "1000"
-      TZ: "American/Vancouver"
+      TZ: "America/Vancouver"
       OPENVPN_PASSWORD: '{{ qbittorrent.openvpn.password }}'
       OPENVPN_USERNAME: '{{ qbittorrent.openvpn.username }}'
       OPENVPN_CONFIG: '{{ qbittorrent.openvpn.config }}'

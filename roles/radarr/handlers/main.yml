@@ -1,4 +1,0 @@
-- name: Restart radarr
-  community.docker.docker_container:
-    name: radarr
-    restart: yes
