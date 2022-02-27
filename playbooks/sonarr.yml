@@ -1,0 +1,25 @@
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: '{{ docker_config_dir }}/sonarr'
+    state: directory
+    mode: '0755'
+
+- set_fact:
+    sonarr_config_volumes:
+      - '{{ docker_config_dir }}/sonarr:/config'
+
+- set_fact:
+    sonarr_volumes: "{{ media_directories + sonarr_config_volumes }}"
+
+- name: sonarr
+  community.docker.docker_container:
+    name: sonarr
+    image: ghcr.io/k8s-at-home/sonarr:v3.0.6.1342
+    auto_remove: true ## FIXME - copy everywhere
+    env:
+      TZ: "American/Vancouver"
+    volumes: '{{ sonarr_volumes }}'
+    restart_policy: unless-stopped
+    labels:
+      traefik.enable: 'true'
+

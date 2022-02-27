@@ -7,8 +7,14 @@
     - include_tasks: playbooks/dozzle.yml
     - include_tasks: playbooks/syncthings.yml
     - include_tasks: playbooks/netbootxyz.yml
+    # Plex
     - include_tasks: playbooks/plex.yml
+    # downloaders
+    - include_tasks: playbooks/nzbget.yml
     - include_tasks: playbooks/qbittorrent.yml
+    # Media Finders
+    - include_tasks: playbooks/bazarr.yml
+    - include_tasks: playbooks/sonarr.yml
 - hosts: philcoulson
   gather_facts: False
   tasks:

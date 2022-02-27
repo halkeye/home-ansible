@@ -1,10 +1,11 @@
 - name: nzbget
   community.docker.docker_container:
     name: nzbget
-    image: amir20/dozzle
+    image: ghcr.io/k8s-at-home/nzbget:v21.1
     state: started
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - '{{ docker_data_dir }}/nzbget:/nzb-downloads'
+      - '{{ docker_config_dir }}/nzbget:/config'
     labels:
       traefik.enable: "true"
 

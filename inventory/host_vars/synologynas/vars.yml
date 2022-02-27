@@ -7,4 +7,14 @@ docker_hostname: nas.g4v.dev
 docker_config_dir: /volume1/docker
 docker_data_dir: /volume1/Apps
 
+media_base_dir: /volume1
 
+media_directories:
+  - '{{ media_base_dir }}/Anime:/anime'
+  - '{{ media_base_dir }}/Anime Movies:/anime-movies'
+  - '{{ media_base_dir }}/Movies:/movies'
+  - '{{ media_base_dir }}/TV:/tv'
+  - '{{ media_base_dir }}/Webseries:/webseries'
+  - '{{ media_base_dir }}/Webseries Movies:/webseries-movies'
+  - '{{ docker_data_dir }}/torrents:/torrents'
+  - '{{ docker_data_dir }}/nzbget:/nzb-downloads'
