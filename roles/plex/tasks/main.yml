@@ -3,7 +3,6 @@
     name: plex
     state: started
     image: plexinc/pms-docker
-    auto_remove: true
     network_mode: host
     env:
       TZ: "American/Vancouver"

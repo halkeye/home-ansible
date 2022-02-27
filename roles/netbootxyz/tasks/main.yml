@@ -3,7 +3,6 @@
     name: netbootxyz
     image: lscr.io/linuxserver/netbootxyz
     state: started
-    auto_remove: true
     env:
       PUID: "1000"
       PGID: "1000"

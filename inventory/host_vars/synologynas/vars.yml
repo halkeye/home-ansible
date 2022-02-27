@@ -6,6 +6,8 @@ ansible_ssh_port: 4022
 docker_hostname: nas.g4v.dev
 docker_config_dir: /volume1/docker
 docker_data_dir: /volume1/Apps
+docker_uid: 1026
+docker_gid: 100
 
 media_base_dir: /volume1
 

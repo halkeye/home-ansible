@@ -2,7 +2,6 @@
   community.docker.docker_container:
     name: qbittorrent
     image: guillaumedsde/alpine-qbittorrent-openvpn:latest
-    auto_remove: true
     env:
       PUID: "1000"
       PGID: "1000"

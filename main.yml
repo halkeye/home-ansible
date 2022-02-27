@@ -1,23 +1,24 @@
 ---
 - hosts: synologynas
   gather_facts: False
-  tasks:
-    - include_tasks: playbooks/traefik.yml
-    - include_tasks: playbooks/glances.yml
-    - include_tasks: playbooks/dozzle.yml
-    - include_tasks: playbooks/syncthings.yml
-    - include_tasks: playbooks/netbootxyz.yml
+  roles:
+    - traefik
+    - glances
+    - dozzle
+    - syncthings
+    - netbootxyz
     # Plex
-    - include_tasks: playbooks/plex.yml
+    - plex
     # downloaders
-    - include_tasks: playbooks/nzbget.yml
-    - include_tasks: playbooks/qbittorrent.yml
+    - nzbget
+    - qbittorrent
     # Media Finders
-    - include_tasks: playbooks/bazarr.yml
-    - include_tasks: playbooks/sonarr.yml
+    - bazarr
+    - sonarr
+    - radarr
 - hosts: philcoulson
   gather_facts: False
-  tasks:
-    - include_tasks: playbooks/traefik.yml
-    - include_tasks: playbooks/glances.yml
-    - include_tasks: playbooks/dozzle.yml
+  roles:
+    - traefik
+    - glances
+    - dozzle
