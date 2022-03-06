@@ -1,3 +1,10 @@
+- name: Pull latest image
+  community.docker.docker_image:
+    name: plexinc/pms-docker
+    source: pull
+  notify:
+    - Restart plex
+
 - name: plex
   community.docker.docker_container:
     name: plex
