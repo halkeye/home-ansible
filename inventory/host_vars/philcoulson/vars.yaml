@@ -1,4 +1,6 @@
 ---
+adoptopenjdk_package: adoptopenjdk-11-hotspot
+adoptopenjdk_state: present
 docker_config_dir: true
 docker_hostname: home.g4v.dev
 docker_data_dir: /opt/docker

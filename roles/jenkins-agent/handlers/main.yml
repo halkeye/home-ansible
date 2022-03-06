@@ -1,0 +1,8 @@
+---
+# handlers file for jenkins-agent
+- name: Restart jenkins-agent
+  systemd:
+    name: jenkins-agent
+    state: restarted
+    daemon_reload: yes
+    enabled: yes

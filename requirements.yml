@@ -1,0 +1,3 @@
+- src: sfuhrm.adoptopenjdk_role
+  version: master
+  name: adoptopenjdk_role

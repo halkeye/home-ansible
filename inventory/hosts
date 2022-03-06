@@ -5,3 +5,6 @@ philcoulson
 
 [nas]
 synologynas
+
+[jenkins_agents]
+philcoulson

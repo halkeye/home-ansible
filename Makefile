@@ -3,12 +3,15 @@
 
 ANSIBLE_PLAYBOOK := ansible-playbook -i inventory --vault-password-file .vault
 
+deps: requirements.yml ## Install ansible dependancies
+	ansible-galaxy install -r requirements.yml
+
 .PHONY: run
-run: ## Run
+run: deps ## Run
 	$(ANSIBLE_PLAYBOOK) main.yml
 
 .PHONY: check
-check: ## Validate all the configs
+check: deps ## Validate all the configs
 	$(ANSIBLE_PLAYBOOK) main.yml --check --diff
 
 .PHONY: help

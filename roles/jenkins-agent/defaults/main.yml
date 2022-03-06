@@ -1,0 +1,5 @@
+---
+jenkins_host: https://ci.g4v.dev
+jenkins_agent_work_dir: /home/jenkins-agent
+jenkins_agent_username: 'jenkins-agent'
+jenkins_agent_group: 'jenkins-agent'
