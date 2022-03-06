@@ -10,6 +10,10 @@ deps: requirements.yml ## Install ansible dependancies
 run: deps ## Run
 	$(ANSIBLE_PLAYBOOK) main.yml
 
+.PHONY: jenkins
+jenkins: deps ## Run
+	$(ANSIBLE_PLAYBOOK) jenkins_agents.yml
+
 .PHONY: check
 check: deps ## Validate all the configs
 	$(ANSIBLE_PLAYBOOK) main.yml --check --diff

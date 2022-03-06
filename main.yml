@@ -42,8 +42,6 @@
     - role: traefik
     - role: glances
     - role: dozzle
-- hosts: jenkins_agents
-  become: yes
-  roles:
-    - role: adoptopenjdk_role
-    - role: jenkins-agent
+
+- name: Jenkins agents
+  import_playbook: jenkins_agents.yml

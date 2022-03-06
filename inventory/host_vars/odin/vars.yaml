@@ -1,0 +1,3 @@
+jenkins_host: https://ci.do.g4v.dev
+adoptopenjdk_package: adoptopenjdk-11-hotspot
+adoptopenjdk_state: present
