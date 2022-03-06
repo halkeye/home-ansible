@@ -5,6 +5,8 @@
     state: started
     restart_policy: unless-stopped
     user: '{{ docker_uid }}'
+    groups:
+      - '{{ docker_gid }}'
     volumes:
       - '{{ docker_data_dir }}/nzbget:/nzb-downloads'
       - '{{ docker_config_dir }}/nzbget:/config'
