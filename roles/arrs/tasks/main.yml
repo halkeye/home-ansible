@@ -11,7 +11,7 @@
 - name: setup {{ service_name }} specific volumes
   set_fact:
     arr_config_volumes:
-      - '{{ docker_config_dir }}/{{ service_name }}:/config'
+      - '{{ docker_config_dir }}/{{ service_name }}:{{ config_path }}'
 
 - name: merge common and {{ service_name }} volumes
   set_fact:
