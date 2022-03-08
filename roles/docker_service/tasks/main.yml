@@ -1,0 +1,41 @@
+---
+# tasks file for docker_service
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: '{{ docker_config_dir }}/{{ service_name }}'
+    state: directory
+    mode: '0777'
+    owner: '{{ docker_uid }}'
+    group: '{{ docker_gid }}'
+  notify:
+    - Restart {{ service_name }}
+
+- name: setup {{ service_name }} specific volume
+  set_fact:
+    config_volume:
+      - '{{ docker_config_dir }}/{{ service_name }}:{{ config_path }}'
+      - "/etc/localtime:/etc/localtime:ro"
+
+- name: merge additional and {{ service_name }} volumes
+  set_fact:
+    volumes: "{{ additional_volumes + config_volume }}"
+
+- name: Pull latest image
+  community.docker.docker_image:
+    name: '{{ service_image }}'
+    source: pull
+  notify:
+    - Restart {{ service_name }}
+
+- name: '{{ service_name }}'
+  community.docker.docker_container:
+    name: '{{ service_name }}'
+    image: '{{ service_image }}'
+    user: '{{ override_docker_uid | default(docker_uid) }}'
+    groups:
+      - '{{ override_docker_gid | default(docker_gid) }}'
+    env: '{{ { "TZ": "America/Vancouver" } | combine(envs) }}'
+    volumes: '{{ volumes }}'
+    restart_policy: unless-stopped
+    labels:
+      traefik.enable: 'true'

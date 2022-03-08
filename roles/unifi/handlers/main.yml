@@ -1,0 +1,6 @@
+---
+- name: 'Restart unifi'
+  community.docker.docker_container:
+    name: 'unifi'
+    restart: yes
+

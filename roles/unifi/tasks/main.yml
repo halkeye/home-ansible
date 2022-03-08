@@ -1,0 +1,35 @@
+# tasks file for docker_service
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: '{{ docker_config_dir }}/unifi'
+    state: directory
+    mode: '0777'
+    owner: 999
+    group: 999
+  notify:
+    - Restart unifi
+
+- name: 'unifi'
+  community.docker.docker_container:
+    name: 'unifi'
+    image: 'jacobalberty/unifi:v7.0.23'
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "{{ docker_config_dir }}/unifi/init.d:/unifi/init.d"
+      - "{{ docker_config_dir }}/unifi/data:/unifi/data"
+    ports:
+      # Device command/control
+      - 8080:8080
+      # 3478/udp - STUN service
+      - 3478:3478/udp
+      # 6789/tcp - Speed Test (unifi5 only)
+      - 6789:3478/udp
+    user: 999
+    env:
+      "UNIFI_STDOUT": "true"
+      "TZ": "America/Vancouver"
+    restart_policy: unless-stopped
+    labels:
+      traefik.enable: "true"
+      traefik.http.services.unifi.loadbalancer.server.scheme: "https"
+      traefik.http.services.unifi.loadbalancer.server.port: "8443"

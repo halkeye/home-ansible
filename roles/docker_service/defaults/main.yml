@@ -1,0 +1,7 @@
+---
+# defaults file for docker_service
+config_path: /config
+additional_volumes: []
+envs: {}
+default_envs:
+  TZ: "America/Vancouver"
