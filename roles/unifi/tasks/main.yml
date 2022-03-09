@@ -13,10 +13,13 @@
   community.docker.docker_container:
     name: 'unifi'
     image: 'jacobalberty/unifi:v7.0.23'
+    # because multicase
+    network_mode: host
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
       - "{{ docker_config_dir }}/unifi/init.d:/unifi/init.d"
       - "{{ docker_config_dir }}/unifi/data:/unifi/data"
+      - "{{ docker_config_dir }}/unifi/log:/unifi/log"
     ports:
       # Device command/control
       - 8080:8080
@@ -31,5 +34,8 @@
     restart_policy: unless-stopped
     labels:
       traefik.enable: "true"
-      traefik.http.services.unifi.loadbalancer.server.scheme: "https"
-      traefik.http.services.unifi.loadbalancer.server.port: "8443"
+      traefik.http.routers.unifi.rule: 'Host(`unifi.{{ docker_hostname }}`)'
+      traefik.http.routers.unifi.entrypoints: 'websecure'
+      traefik.http.routers.unifi.service: 'svc_unifi'
+      traefik.http.services.svc_unifi.loadbalancer.server.port: '8443'
+      traefik.http.services.svc_unifi.loadbalancer.server.scheme: 'https'

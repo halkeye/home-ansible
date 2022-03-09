@@ -11,6 +11,8 @@
       - '{{ docker_data_dir }}/traefik/acme.json:/acme.json'
       - /var/run/docker.sock:/var/run/docker.sock:ro
     command_handling: correct
+    etc_hosts:
+      host.docker.internal: host-gateway
     command:
       - '--global.sendAnonymousUsage'
       - '--log.level=INFO'
