@@ -1,42 +1,49 @@
 ---
-#- hosts: synologynas
-#  gather_facts: False
-#  roles:
-#    - traefik
-#    - glances
-#    - dozzle
-#    - syncthings
-#    - netbootxyz
-#    # Plex
-#    - plex
-#    # downloaders
-#    - nzbget
-#    - qbittorrent
-#    # Media Finders
-#    - role: arrs
-#      vars:
-#        service_name: bazarr
-#        service_image: ghcr.io/k8s-at-home/bazarr:v1.0.3
-#    - role: arrs
-#      vars:
-#        service_name: sonarr
-#        service_image: ghcr.io/k8s-at-home/sonarr:v3.0.7.1477
-#    - role: arrs
-#      vars:
-#        service_name: radarr
-#        service_image: ghcr.io/k8s-at-home/radarr:v4.0.5.5981
-#    - role: arrs
-#      vars:
-#        service_name: lidarr
-#        service_image: ghcr.io/k8s-at-home/lidarr:v1.0.0.2471
-#    - role: arrs
-#      vars:
-#        service_name: prowlarr
-#        service_image: ghcr.io/k8s-at-home/prowlarr:v0.2.0.1560
-#    - role: arrs
-#      vars:
-#        service_name: readarr
-#        service_image: ghcr.io/k8s-at-home/readarr:v0.1.1.1259
+- hosts: synologynas
+  gather_facts: False
+  roles:
+    - traefik
+    - glances
+    - dozzle
+    - syncthings
+    - netbootxyz
+    # Plex
+    - plex
+    # downloaders
+    - nzbget
+    - qbittorrent
+    # Media Finders
+    - role: arrs
+      vars:
+        service_name: bazarr
+        service_image: ghcr.io/k8s-at-home/bazarr:v1.0.3
+    - role: arrs
+      vars:
+        service_name: sonarr
+        service_image: ghcr.io/k8s-at-home/sonarr:v3.0.7.1477
+    - role: arrs
+      vars:
+        service_name: radarr
+        service_image: ghcr.io/k8s-at-home/radarr:v4.0.5.5981
+    - role: arrs
+      vars:
+        service_name: lidarr
+        service_image: ghcr.io/k8s-at-home/lidarr:v1.0.0.2471
+    - role: arrs
+      vars:
+        service_name: prowlarr
+        service_image: ghcr.io/k8s-at-home/prowlarr:v0.2.0.1560
+    - role: arrs
+      vars:
+        service_name: readarr
+        service_image: ghcr.io/k8s-at-home/readarr:v0.1.1.1259
+    - role: linuxserver
+      vars:
+        service_name: calibre-web
+        service_image: linuxserver/calibre-web:version-0.6.16
+        volumes:
+          - '{{media_base_dir}}/Books:/books'
+
 - hosts: philcoulson
   roles:
     - role: traefik
