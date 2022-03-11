@@ -5,7 +5,7 @@ ansible_ssh_user: halkeye
 adoptopenjdk_package: adoptopenjdk-11-hotspot
 adoptopenjdk_state: present
 
-docker_hostname: home.g4v.dev
+docker_hostname: pc.g4v.dev
 docker_config_dir: /opt/docker
 docker_data_dir: /opt/docker
 docker_uid: 1000
