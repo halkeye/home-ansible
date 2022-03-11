@@ -1,6 +1,6 @@
 ---
 # FIXME - overseerr isn't really an arr, so shouldn't use this role
-- import_role:
+- include_role:
     name: arrs
   vars:
     service_name: overseerr

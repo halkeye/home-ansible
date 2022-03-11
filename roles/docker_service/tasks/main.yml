@@ -4,7 +4,7 @@
   ansible.builtin.file:
     path: '{{ docker_config_dir }}/{{ service_name }}'
     state: directory
-    mode: '0777'
+    mode: '0775'
     owner: '{{ docker_uid }}'
     group: '{{ docker_gid }}'
   notify:
@@ -21,14 +21,15 @@
   community.docker.docker_container:
     name: '{{ service_name }}'
     image: '{{ service_image }}'
-    user: '{{ override_docker_uid | default(docker_uid) }}'
-    groups:
-      - '{{ override_docker_gid | default(docker_gid) }}'
-    env: '{{ { "TZ": "America/Vancouver" } | combine(envs) }}'
-    volumes: '{{ ["/etc/localtime:/etc/localtime:ro"] + volumes }}'
-    ports: '{{ ports | default([]) }}'
+    capabilities: '{{ capabilities }}'
+    env: '{{ { "TZ": "America/Vancouver" } | combine(env) }}'
+    groups: '{{ docker_groups }}'
+    labels: '{{ { "traefik.enable": "true" } | combine(labels) }}'
+    networks: '{{ networks }}'
+    pid_mode: '{{ pid_mode }}'
+    ports: '{{ ports }}'
     restart_policy: unless-stopped
-    labels:
-      traefik.enable: 'true'
+    user: '{{ docker_user }}'
+    volumes: '{{ ["/etc/localtime:/etc/localtime:ro"] + volumes }}'
   notify:
     - Restart {{ service_name }}

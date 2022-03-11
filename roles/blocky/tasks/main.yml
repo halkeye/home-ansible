@@ -21,11 +21,13 @@
   notify:
     - Restart blocky
 
-- import_role:
+- include_role:
     name: docker_service
   vars:
     service_name: blocky
     service_image: spx01/blocky
+    docker_user: ""
+    docker_groups: []
     volumes:
         - '{{docker_config_dir}}/blocky/config.yml:/app/config.yml'
     ports:

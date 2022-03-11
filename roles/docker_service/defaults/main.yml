@@ -1,7 +1,13 @@
 ---
 # defaults file for docker_service
 config_path: /config
-additional_volumes: []
-envs: {}
-default_envs:
-  TZ: "America/Vancouver"
+env: {}
+labels: {}
+docker_user: '{{ docker_uid }}'
+docker_groups: ['{{ docker_gid }}']
+networks: []
+pid_mode: ""
+ports: []
+service_image: ' missing service image'
+service_name: 'missing service name'
+capabilities: []

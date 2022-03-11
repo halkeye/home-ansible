@@ -1,10 +1,12 @@
 - name: Glances
-  community.docker.docker_container:
-    name: glances
-    image: nicolargo/glances
-    state: started
-    restart_policy: unless-stopped
+  include_role:
+    name: docker_service
+  vars:
+    service_name: glances
+    service_image: nicolargo/glances
     pid_mode: host
+    docker_user: ""
+    docker_groups: []
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     env:

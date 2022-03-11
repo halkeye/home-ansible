@@ -1,20 +1,20 @@
 - name: qbittorrent
-  community.docker.docker_container:
-    name: qbittorrent
-    image: guillaumedsde/alpine-qbittorrent-openvpn:latest
+  include_role:
+    name: docker_service
+  vars:
+    service_name: qbittorrent
+    service_image: guillaumedsde/alpine-qbittorrent-openvpn:latest
+    docker_user: ""
+    docker_groups: []
+    volumes:
+      - '{{ docker_config_dir }}/qbittorrent:/config'
+      - '{{ docker_data_dir }}/torrents:/torrents'
     env:
       PUID: '{{ docker_uid | quote }}'
       PGID: '{{ docker_gid | quote }}'
-      TZ: "America/Vancouver"
       OPENVPN_PASSWORD: '{{ qbittorrent.openvpn.password }}'
       OPENVPN_USERNAME: '{{ qbittorrent.openvpn.username }}'
       OPENVPN_CONFIG: '{{ qbittorrent.openvpn.config }}'
       OPENVPN_PROVIDER: '{{ qbittorrent.openvpn.provider }}'
-    volumes:
-      - '{{ docker_config_dir }}/qbittorrent:/config'
-      - '{{ docker_data_dir }}/torrents:/torrents'
-    restart_policy: unless-stopped
     capabilities:
       - NET_ADMIN
-    labels:
-      traefik.enable: 'true'
