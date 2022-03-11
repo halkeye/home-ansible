@@ -1,0 +1,9 @@
+---
+# FIXME - overseerr isn't really an arr, so shouldn't use this role
+- import_role:
+    name: arrs
+  vars:
+    service_name: overseerr
+    service_image: ghcr.io/sct/overseerr:1.28.0
+    config_path: /app/config
+    media_directories: []

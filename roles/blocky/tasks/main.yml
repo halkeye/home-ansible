@@ -1,0 +1,23 @@
+---
+- name: Copy config file
+  become: true
+  template:
+    src: config.yml.j2
+    dest: '{{docker_config_dir}}/blocky/config.yml'
+    owner: 0
+    group: 0
+    mode: 0755
+  notify:
+    - Restart blocky
+
+- import_role:
+    name: docker_service
+  vars:
+    service_name: blocky
+    service_image: spx01/blocky
+    volumes:
+        - '{{docker_config_dir}}/blocky/config.yml:/app/config.yml'
+    ports:
+        - 4000:4000
+        - 53:53/udp
+        - 53:53/tcp

@@ -1,0 +1,29 @@
+---
+bootstrapDns: 1.1.1.1:53
+upstream:
+  default:
+  - tcp-tls:1dot1dot1dot1.cloudflare-dns.com
+  - 1.1.1.1
+  - https://cloudflare-dns.com/dns-query
+customDNS:
+  mapping:
+    home.g4v.dev: 172.16.10.6
+    nas.g4v.dev: 172.16.10.10
+    mqtt.int.g4v.dev: 172.16.10.172
+conditional:
+  mapping:
+    dhcp.home: 172.16.10.1
+    10.16.172.in-addr.arpa: 172.16.10.1
+    .: 172.16.10.1
+prometheus:
+  enable: true
+  path: /metrics
+blocking:
+  whiteLists:
+    whitelist:
+      - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
+#    ads:
+#      - whitelist.txt
+#  blackLists:
+#    games:
+#      - gamesblocklists.txt

@@ -1,4 +1,5 @@
 - name: Create a directory if it does not exist
+  become: true
   ansible.builtin.file:
     path: '{{ docker_config_dir }}/{{ service_name }}'
     state: directory

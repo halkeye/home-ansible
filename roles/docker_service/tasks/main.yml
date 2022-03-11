@@ -10,16 +10,6 @@
   notify:
     - Restart {{ service_name }}
 
-- name: setup {{ service_name }} specific volume
-  set_fact:
-    config_volume:
-      - '{{ docker_config_dir }}/{{ service_name }}:{{ config_path }}'
-      - "/etc/localtime:/etc/localtime:ro"
-
-- name: merge additional and {{ service_name }} volumes
-  set_fact:
-    volumes: "{{ additional_volumes + config_volume }}"
-
 - name: Pull latest image
   community.docker.docker_image:
     name: '{{ service_image }}'
@@ -35,7 +25,10 @@
     groups:
       - '{{ override_docker_gid | default(docker_gid) }}'
     env: '{{ { "TZ": "America/Vancouver" } | combine(envs) }}'
-    volumes: '{{ volumes }}'
+    volumes: '{{ ["/etc/localtime:/etc/localtime:ro"] + volumes }}'
+    ports: '{{ ports | default([]) }}'
     restart_policy: unless-stopped
     labels:
       traefik.enable: 'true'
+  notify:
+    - Restart {{ service_name }}

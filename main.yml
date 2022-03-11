@@ -12,6 +12,7 @@
     # downloaders
     - nzbget
     - qbittorrent
+    - role: blocky
     # Media Finders
     - role: arrs
       vars:
@@ -50,13 +51,8 @@
     - role: glances
     - role: dozzle
     - role: unifi
-      # FIXME - overseerr isn't really an arr, so shouldn't use this role
-    - role: arrs
-      vars:
-        service_name: overseerr
-        service_image: ghcr.io/sct/overseerr:1.28.0
-        config_path: /app/config
-        media_directories: []
+    - role: blocky
+    - role: overseerr
 
 - name: Jenkins agents
   import_playbook: jenkins_agents.yml
