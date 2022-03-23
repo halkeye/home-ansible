@@ -13,6 +13,16 @@
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker"
+    },
+    {
+      "fileMatch": [
+        "^roles/.*/tasks/main.yml$"
+      ],
+      "matchStrings": [
+        "image: \"(?<currentValue>.*)@(?<currentDigest>.*)\""
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
     }
   ]
 }
