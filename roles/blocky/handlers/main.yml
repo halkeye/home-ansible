@@ -1,2 +1,6 @@
 ---
 # handlers file for blocky
+- name: 'Restart blocky'
+  community.docker.docker_container:
+    name: 'blocky'
+    restart: yes
