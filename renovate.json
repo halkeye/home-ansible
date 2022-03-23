@@ -1,5 +1,18 @@
 {
   "extends": [
     "config:base"
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "^roles/.*/tasks/main.yml$"
+      ],
+      "matchStrings": [
+        "image: '(?<depName>[a-z/-]+):(?<currentValue>[a-z0-9.-]+)'",
+        "image: (?<depName>[a-z/-]+):(?<currentValue>[a-z0-9.-]+)"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
+    }
   ]
 }
