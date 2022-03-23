@@ -19,7 +19,7 @@
         "^roles/.*/tasks/main.yml$"
       ],
       "matchStrings": [
-        "image: \"(?<currentValue>.*)@(?<currentDigest>.*)\""
+        "image: \"(?<depName>[a-z/-]+):(?<currentValue>.*)@(?<currentDigest>.*)\""
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker"
