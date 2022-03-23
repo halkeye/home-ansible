@@ -30,6 +30,7 @@
     ports: '{{ ports }}'
     restart_policy: unless-stopped
     user: '{{ docker_user }}'
+    healthcheck: '{{ healthcheck | default({}) }}'
     volumes: '{{ ["/etc/localtime:/etc/localtime:ro"] + volumes }}'
   notify:
     - Restart {{ service_name }}

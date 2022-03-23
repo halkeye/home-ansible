@@ -3,7 +3,7 @@
     name: docker_service
   vars:
     service_name: qbittorrent
-    service_image: guillaumedsde/alpine-qbittorrent-openvpn:latest
+    service_image: guillaumedsde/alpine-qbittorrent-openvpn@sha256:c26e53f3d1f2eb2503b442aa151ad80b044280b5bbd594c8bf95adac322187ce
     docker_user: ""
     docker_groups: []
     volumes:
@@ -18,3 +18,8 @@
       OPENVPN_PROVIDER: '{{ qbittorrent.openvpn.provider }}'
     capabilities:
       - NET_ADMIN
+    healthcheck:
+      test: ["CMD-SHELL", "healthcheck.sh"]
+      interval: 1s
+      retries: 3
+      start_period: 10s
