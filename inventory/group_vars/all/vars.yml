@@ -1,2 +1,4 @@
 ---
 media_base_dir: /volume1
+
+config_mode: '0775'

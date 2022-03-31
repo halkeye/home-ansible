@@ -24,7 +24,7 @@
   vars:
     service_name: blocky
     service_image: spx01/blocky
-    docker_user: ""
+    docker_user: "blocky"
     docker_groups: []
     volumes:
         - '{{docker_config_dir}}/blocky/config.yml:/app/config.yml'

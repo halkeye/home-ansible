@@ -4,6 +4,7 @@
     name: traefik
     image: traefik:v2.6.3
     restart_policy: unless-stopped
+    pull: yes
     state: started
     security_opts:
       - no-new-privileges:true

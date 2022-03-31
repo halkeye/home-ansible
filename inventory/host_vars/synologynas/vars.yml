@@ -12,6 +12,8 @@ docker_gid: 100
 
 media_base_dir: /volume1
 
+config_mode: '0775'
+
 media_directories:
   - '{{ docker_data_dir }}/nzbget:/nzb-downloads'
   - '{{ docker_data_dir }}/torrents:/torrents'

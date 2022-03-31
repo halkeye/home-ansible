@@ -2,16 +2,17 @@
 - hosts: synologynas
   gather_facts: False
   roles:
-    - traefik
-    - glances
-    - dozzle
-    - syncthings
-    - netbootxyz
+    - role: autoheal
+    - role: traefik
+    - role: glances
+    - role: dozzle
+    - role: syncthings
+    - role: netbootxyz
     # Plex
-    - plex
+    - role: plex
     # downloaders
-    - nzbget
-    - qbittorrent
+    - role: nzbget
+    - role: qbittorrent
     - role: blocky
     # Media Finders
     - role: arrs
@@ -42,12 +43,15 @@
       vars:
         service_name: calibre-web
         service_image: linuxserver/calibre-web:version-0.6.16
+        docker_uid: '1026'
+        docker_gid: '100'
         volumes:
           - '{{media_base_dir}}/Books:/books'
     - role: stash
 
 - hosts: philcoulson
   roles:
+    - role: autoheal
     - role: traefik
     - role: glances
     - role: dozzle

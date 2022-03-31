@@ -1,0 +1,20 @@
+---
+- include_role:
+    name: docker_service
+  vars:
+    service_name: autoheal
+    service_image: willfarrell/autoheal:1.2.0
+    docker_user: ""
+    docker_groups: []
+    command:
+      - autoheal
+    entrypoint:
+      - /docker-entrypoint
+    #entrypoint:
+    #  - sh
+    #  - -x
+    #  - /docker-entrypoint
+    env:
+      AUTOHEAL_CONTAINER_LABEL: all
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
