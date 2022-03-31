@@ -4,7 +4,6 @@
   ansible.builtin.file:
     path: '{{ docker_config_dir }}/blocky'
     state: directory
-    mode: '0777'
     owner: '{{ docker_uid }}'
     group: '{{ docker_gid }}'
   notify:
@@ -17,7 +16,6 @@
     dest: '{{docker_config_dir}}/blocky/config.yml'
     owner: '{{ docker_uid }}'
     group: '{{ docker_gid }}'
-    mode: 0755
   notify:
     - Restart blocky
 
