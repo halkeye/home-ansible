@@ -20,6 +20,7 @@ media_directories:
   - '{{ media_base_dir }}/Audio/Audio Books:/audiobooks'
   - '{{ media_base_dir }}/Audio/Music:/music'
   - '{{ media_base_dir }}/Books:/books'
+  - '{{ media_base_dir }}/Comedian Specials:/comedian-specials'
   - '{{ media_base_dir }}/Comics:/comics'
   - '{{ media_base_dir }}/Movies:/movies'
   - '{{ media_base_dir }}/TV:/tv'
