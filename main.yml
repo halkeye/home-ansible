@@ -44,6 +44,7 @@
         service_image: linuxserver/calibre-web:version-0.6.16
         volumes:
           - '{{media_base_dir}}/Books:/books'
+    - role: stash
 
 - hosts: philcoulson
   roles:

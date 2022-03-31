@@ -1,0 +1,36 @@
+---
+- name: Make sure config dir exists
+  become: true
+  ansible.builtin.file:
+    path: '{{ docker_config_dir }}/stash'
+    state: directory
+    mode: '0777'
+    owner: '{{ docker_uid }}'
+    group: '{{ docker_gid }}'
+  notify:
+    - Restart stash
+
+- name: Make sure data dir exists
+  become: true
+  ansible.builtin.file:
+    path: '{{ docker_data_dir }}/stash'
+    state: directory
+    mode: '0777'
+    owner: '{{ docker_uid }}'
+    group: '{{ docker_gid }}'
+  notify:
+    - Restart stash
+
+- include_role:
+    name: docker_service
+  vars:
+    service_name: stash
+    service_image: stashapp/stash:v0.13.1
+    docker_user: ""
+    docker_groups: []
+    env:
+      STASH_PORT: "9999"
+    volumes:
+      - '{{ docker_data_dir }}/stash:/media'
+      - '{{ media_base_dir }}/homes:{{ media_base_dir }}/homes'
+      - '{{ docker_config_dir }}/stash:/root/.stash'
