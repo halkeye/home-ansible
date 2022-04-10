@@ -1,2 +1,6 @@
 ---
-# handlers file for overseerr
+# handlers file for blocky
+- name: 'Restart overseerr'
+  community.docker.docker_container:
+    name: 'overseerr'
+    restart: yes
