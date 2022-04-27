@@ -12,7 +12,7 @@
 - name: 'unifi'
   community.docker.docker_container:
     name: 'unifi'
-    image: 'jacobalberty/unifi:v7.0.25'
+    image: 'jacobalberty/unifi:v7.1.61'
     # because multicase
     network_mode: host
     volumes:
