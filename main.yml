@@ -57,7 +57,6 @@
     - role: glances
     - role: dozzle
     - role: blocky
-    - role: overseerr
 
 - name: Jenkins agents
   import_playbook: jenkins_agents.yml
