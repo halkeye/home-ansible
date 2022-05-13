@@ -15,6 +15,7 @@
     - role: qbittorrent
     - role: blocky
     # Media Finders
+    - role: overseerr
     - role: arrs
       vars:
         service_name: bazarr
@@ -55,7 +56,6 @@
     - role: traefik
     - role: glances
     - role: dozzle
-    - role: unifi
     - role: blocky
     - role: overseerr
 
