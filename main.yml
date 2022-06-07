@@ -23,11 +23,11 @@
     - role: arrs
       vars:
         service_name: sonarr
-        service_image: ghcr.io/k8s-at-home/sonarr:v3.0.7.1477
+        service_image: ghcr.io/k8s-at-home/sonarr:v3.0.8.1507
     - role: arrs
       vars:
         service_name: radarr
-        service_image: ghcr.io/k8s-at-home/radarr:v4.0.5.5981
+        service_image: ghcr.io/k8s-at-home/radarr:v4.1.0.6175
     - role: arrs
       vars:
         service_name: lidarr
@@ -35,11 +35,11 @@
     - role: arrs
       vars:
         service_name: prowlarr
-        service_image: ghcr.io/k8s-at-home/prowlarr:v0.2.0.1560
+        service_image: ghcr.io/k8s-at-home/prowlarr:v0.4.0.1802
     - role: arrs
       vars:
         service_name: readarr
-        service_image: ghcr.io/k8s-at-home/readarr:v0.1.1.1259
+        service_image: ghcr.io/k8s-at-home/readarr:v0.1.1.1320
     - role: linuxserver
       vars:
         service_name: calibre-web
@@ -50,13 +50,13 @@
           - '{{media_base_dir}}/Books:/books'
     - role: stash
 
-- hosts: philcoulson
-  roles:
-    - role: autoheal
-    - role: traefik
-    - role: glances
-    - role: dozzle
-    - role: blocky
+#- hosts: philcoulson
+#  roles:
+#    - role: autoheal
+#    - role: traefik
+#    - role: glances
+#    - role: dozzle
+#    - role: blocky
 
 - name: Jenkins agents
   import_playbook: jenkins_agents.yml
