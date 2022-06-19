@@ -50,12 +50,9 @@
           - '{{media_base_dir}}/Books:/books'
     - role: stash
 
-#- hosts: philcoulson
+#- hosts: thor
 #  roles:
 #    - role: autoheal
-#    - role: traefik
-#    - role: glances
-#    - role: dozzle
 #    - role: blocky
 
 - name: Jenkins agents

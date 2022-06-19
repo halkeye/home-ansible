@@ -1,11 +1,10 @@
 [all]
 
 [amd64]
-philcoulson
+thor
 
 [nas]
 synologynas
 
 [jenkins_agents]
-philcoulson
-odin
+thor
