@@ -35,7 +35,7 @@
     - role: arrs
       vars:
         service_name: prowlarr
-        service_image: ghcr.io/k8s-at-home/prowlarr:v0.4.0.1802
+        service_image: ghcr.io/k8s-at-home/prowlarr:v0.4.0.1816
     - role: arrs
       vars:
         service_name: readarr

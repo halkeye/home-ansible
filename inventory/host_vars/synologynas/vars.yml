@@ -3,6 +3,7 @@ ansible_host: 172.16.10.10
 ansible_connection: ssh
 ansible_ssh_user: halkeye
 ansible_ssh_port: 4022
+ansible_python_interpreter: /var/services/homes/halkeye/.python/./bin/python3
 
 docker_hostname: nas.g4v.dev
 docker_config_dir: /volume1/docker

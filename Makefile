@@ -2,21 +2,23 @@
 .DEFAULT_GOAL := run
 
 ANSIBLE_PLAYBOOK := ansible-playbook -i inventory --vault-password-file .vault
+ANSIBLE_DEBUG :=
+PLAYBOOK := main
 
 deps: requirements.yml ## Install ansible dependancies
 	ansible-galaxy install -r requirements.yml
 
 .PHONY: run
 run: deps ## Run
-	$(ANSIBLE_PLAYBOOK) main.yml
+	$(ANSIBLE_PLAYBOOK) $(PLAYBOOK).yml $(ANSIBLE_DEBUG)
 
 .PHONY: jenkins
 jenkins: deps ## Run
-	$(ANSIBLE_PLAYBOOK) jenkins_agents.yml
+	$(ANSIBLE_PLAYBOOK) jenkins_agents.yml $(ANSIBLE_DEBUG)
 
 .PHONY: check
 check: deps ## Validate all the configs
-	$(ANSIBLE_PLAYBOOK) main.yml --check --diff
+	$(ANSIBLE_PLAYBOOK) $(PLAYBOOK).yml $(ANSIBLE_DEBUG) --check --diff
 
 .PHONY: help
 help:

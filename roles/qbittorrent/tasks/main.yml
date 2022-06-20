@@ -16,6 +16,7 @@
       OPENVPN_USERNAME: '{{ qbittorrent.openvpn.username }}'
       OPENVPN_CONFIG: '{{ qbittorrent.openvpn.config }}'
       OPENVPN_PROVIDER: '{{ qbittorrent.openvpn.provider }}'
+      LAN: 172.16.10.0/24
     capabilities:
       - NET_ADMIN
     healthcheck:
