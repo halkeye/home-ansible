@@ -50,10 +50,11 @@
           - '{{media_base_dir}}/Books:/books'
     - role: stash
 
-#- hosts: thor
-#  roles:
-#    - role: autoheal
-#    - role: blocky
+- hosts: thor
+  gather_facts: False
+  roles:
+    - role: autoheal
+    - role: blocky
 
-- name: Jenkins agents
-  import_playbook: jenkins_agents.yml
+#- name: Jenkins agents
+#  import_playbook: jenkins_agents.yml
