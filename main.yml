@@ -43,7 +43,7 @@
     - role: linuxserver
       vars:
         service_name: calibre-web
-        service_image: linuxserver/calibre-web:version-0.6.16
+        service_image: linuxserver/calibre-web:version-0.6.19
         docker_uid: '1026'
         docker_gid: '100'
         volumes:
