@@ -4,6 +4,7 @@
   roles:
     - role: autoheal
     - role: traefik
+      tags: traefik
     - role: glances
     - role: dozzle
     - role: syncthings
