@@ -1,0 +1,8 @@
+http:
+  routers:
+    tailscale-syncthings:
+      rule: 'Host(`syncthing.{{ tailscale_hostname }}`)'
+      tls: {}
+      entryPoints:
+        - websecure
+      service: "syncthing@docker"

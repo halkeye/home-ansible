@@ -19,6 +19,16 @@
   notify:
     - Restart traefik
 
+- name: Copy routes file
+  become: true
+  template:
+    src: routes.yaml.j2
+    dest: '{{docker_config_dir}}/traefik/routes.yaml'
+    owner: '{{ docker_uid }}'
+    group: '{{ docker_gid }}'
+  notify:
+    - Restart traefik
+
 - name: Traefik
   community.docker.docker_container:
     name: traefik
@@ -30,13 +40,13 @@
       - no-new-privileges:true
     volumes:
       - '{{ docker_data_dir }}/traefik/acme.json:/acme.json'
-      - '{{ docker_config_dir }}/traefik/traefik.yaml:/config.yaml'
+      - '{{ docker_config_dir }}/traefik:/config'
       - /var/run/docker.sock:/var/run/docker.sock:ro
     command_handling: correct
     etc_hosts:
       host.docker.internal: host-gateway
     command:
-      - '--configFile=/config.yaml'
+      - '--configFile=/config/traefik.yaml'
     ports:
       - 80:80
       - 443:443

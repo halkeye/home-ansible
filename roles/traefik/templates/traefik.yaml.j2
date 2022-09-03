@@ -4,7 +4,7 @@ global:
 log:
   level: INFO
 experimental:
-  hub: true
+  hub: false
 hub:
   tls:
     insecure: true
@@ -13,6 +13,13 @@ metrics:
     addRoutersLabels: true
 serversTransport:
   insecureSkipVerify: true
+providers:
+  file:
+    filename: /config/routes.yaml
+  docker:
+    endpoint: 'unix:///var/run/docker.sock'
+    swarmMode: false
+    defaultRule: 'Host(`{{ "{{ normalize .Name }}" }}.{{ docker_hostname }}`)'
 entryPoints:
   web:
     address: "0.0.0.0:80"
@@ -38,11 +45,6 @@ entryPoints:
           - main: "{{ tailscale_hostname }}"
             sans:
               - "*.{{ tailscale_hostname }}"
-providers:
-  docker:
-    endpoint: 'unix:///var/run/docker.sock'
-    swarmMode: false
-    defaultRule: 'Host(`{{ "{{ normalize .Name }}" }}.{{ docker_hostname }}`)'
 api: {}
 certificatesResolvers:
   cloudflare:
