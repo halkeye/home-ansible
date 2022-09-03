@@ -1,0 +1,55 @@
+accessLog: {}
+global:
+  sendAnonymousUsage: true
+log:
+  level: INFO
+experimental:
+  hub: true
+hub:
+  tls:
+    insecure: true
+metrics:
+  prometheus:
+    addRoutersLabels: true
+serversTransport:
+  insecureSkipVerify: true
+entryPoints:
+  web:
+    address: "0.0.0.0:80"
+    forwardedHeaders:
+      trustedIPs:
+        - 127.0.0.1/32
+        - 100.78.38.99
+        - 172.17.0.1
+  websecure:
+    address: "0.0.0.0:443"
+    forwardedHeaders:
+      trustedIPs:
+        - 127.0.0.1/32
+        - 100.78.38.99
+        - 172.17.0.1
+    http:
+      tls:
+        certresolver: cloudflare
+        domains:
+          - main: "{{ docker_hostname }}"
+            sans:
+              - "*.{{ docker_hostname }}"
+          - main: "{{ tailscale_hostname }}"
+            sans:
+              - "*.{{ tailscale_hostname }}"
+providers:
+  docker:
+    endpoint: 'unix:///var/run/docker.sock'
+    swarmMode: false
+    defaultRule: 'Host(`{{ "{{ normalize .Name }}" }}.{{ docker_hostname }}`)'
+api: {}
+certificatesResolvers:
+  cloudflare:
+    acme:
+      dnschallenge:
+        provider: cloudflare
+        resolvers:
+          - 1.1.1.1:53
+          - 1.0.0.1:53
+      storage: /acme.json'

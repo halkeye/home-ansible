@@ -1,4 +1,24 @@
 ---
+- name: Create a directory if it does not exist
+  become: true
+  ansible.builtin.file:
+    path: '{{ docker_config_dir }}/traefik'
+    state: directory
+    owner: '{{ docker_uid }}'
+    group: '{{ docker_gid }}'
+  notify:
+    - Restart traefik
+
+- name: Copy config file
+  become: true
+  template:
+    src: traefik.yaml.j2
+    dest: '{{docker_config_dir}}/traefik/traefik.yaml'
+    owner: '{{ docker_uid }}'
+    group: '{{ docker_gid }}'
+  notify:
+    - Restart traefik
+
 - name: Traefik
   community.docker.docker_container:
     name: traefik
@@ -10,34 +30,13 @@
       - no-new-privileges:true
     volumes:
       - '{{ docker_data_dir }}/traefik/acme.json:/acme.json'
+      - '{{ docker_config_dir }}/traefik/traefik.yaml:/config.yaml'
       - /var/run/docker.sock:/var/run/docker.sock:ro
     command_handling: correct
     etc_hosts:
       host.docker.internal: host-gateway
     command:
-      - '--global.sendAnonymousUsage'
-      - '--log.level=INFO'
-      - '--experimental.hub'
-      - '--hub.tls.insecure'
-      - '--metrics.prometheus.addrouterslabels'
-      - '--serversTransport.insecureSkipVerify=true'
-      - '--entrypoints.web.address=:80'
-      - '--entrypoints.web.forwardedHeaders.trustedIPs=127.0.0.1/32,100.78.38.99,172.17.0.1'
-      - '--entrypoints.websecure.address=:443'
-      - '--entrypoints.websecure.http.tls.certresolver=cloudflare'
-      - '--entrypoints.websecure.http.tls.domains[0].main={{ docker_hostname }}'
-      - '--entrypoints.websecure.http.tls.domains[0].sans=*.{{ docker_hostname }}'
-      - '--entrypoints.websecure.forwardedHeaders.trustedIPs=127.0.0.1/32,100.78.38.99,172.17.0.1'
-      - '--providers.docker=true'
-      - '--providers.docker.endpoint=unix:///var/run/docker.sock'
-      - '--providers.docker.swarmMode=false'
-      - '--providers.docker.defaultRule=Host(`{{ "{{ normalize .Name }}" }}.{{ docker_hostname }}`)'
-      - '--api'
-      - '--certificatesresolvers.cloudflare.acme.dnschallenge=true'
-      - '--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare'
-      - '--certificatesResolvers.cloudflare.acme.dnsChallenge.resolvers=1.1.1.1:53,1.0.0.1:53'
-      - '--certificatesresolvers.cloudflare.acme.storage=/acme.json'
-      - '--pilot.token={{ traefik_pilot_key | default ("") }}'
+      - '--configFile=/config.yaml'
     ports:
       - 80:80
       - 443:443

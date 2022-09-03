@@ -5,6 +5,9 @@ ansible_ssh_user: halkeye
 ansible_ssh_port: 4022
 ansible_python_interpreter: /var/services/homes/halkeye/.python/./bin/python3
 
+
+tailscale_hostname: ts.g4v.dev
+
 docker_hostname: nas.g4v.dev
 docker_config_dir: /volume1/docker
 docker_data_dir: /volume1/Apps
