@@ -24,7 +24,7 @@
     - role: arrs
       vars:
         service_name: sonarr
-        service_image: ghcr.io/k8s-at-home/sonarr:v3.0.8.1507
+        service_image: ghcr.io/k8s-at-home/sonarr:v3.0.9.1549
     - role: arrs
       vars:
         service_name: radarr
@@ -32,11 +32,11 @@
     - role: arrs
       vars:
         service_name: lidarr
-        service_image: ghcr.io/k8s-at-home/lidarr:v1.0.0.2471
+        service_image: ghcr.io/k8s-at-home/lidarr:v1.0.2.2592
     - role: arrs
       vars:
         service_name: prowlarr
-        service_image: ghcr.io/k8s-at-home/prowlarr:v0.4.0.1802
+        service_image: ghcr.io/k8s-at-home/prowlarr-develop:v0.4.4.1947
     - role: arrs
       vars:
         service_name: readarr
