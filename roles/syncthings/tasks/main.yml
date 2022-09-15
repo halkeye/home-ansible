@@ -3,13 +3,17 @@
     name: syncthing
     image: lscr.io/linuxserver/syncthing
     env:
-      PUID: "1000"
-      PGID: "1000"
+      PUID: "1026"
+      PGID: "100"
       TZ: "America/Vancouver"
+    ports:
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
     volumes:
       - '{{ docker_config_dir }}/syncthing:/config'
       - '{{ docker_data_dir }}/syncthing/data1:/data1'
-      - '{{ docker_data_dir }}/syncthing/data2:/data2'
+      - '/volume1/homes/halkeye:/volume1/homes/halkeye'
     restart_policy: unless-stopped
     labels:
       traefik.enable: 'true'
