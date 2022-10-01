@@ -9,6 +9,9 @@
     - role: dozzle
     - role: syncthings
     - role: netbootxyz
+    # debug
+    - role: whoami
+      tags: whoami
     # Plex
     - role: plex
     # downloaders

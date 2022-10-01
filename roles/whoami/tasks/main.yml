@@ -1,0 +1,8 @@
+---
+- include_role:
+    name: docker_service
+  vars:
+    service_name: whoami
+    service_image: traefik/whoami
+    docker_user: ""
+    docker_groups: []
