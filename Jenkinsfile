@@ -8,6 +8,7 @@ pipeline {
 
   environment {
     ANSIBLE_VAULT_FILE = credentials('ansible-vault')
+    ANSIBLE_HOST_KEY_CHECKING = "False"
     HOME = "${WORKSPACE}"
   }
 
