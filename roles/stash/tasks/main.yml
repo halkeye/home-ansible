@@ -25,7 +25,7 @@
     name: docker_service
   vars:
     service_name: stash
-    service_image: stashapp/stash:v0.16.1
+    service_image: stashapp/stash:v0.17.1
     docker_user: ""
     docker_groups: []
     env:
