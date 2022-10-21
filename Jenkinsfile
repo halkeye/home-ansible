@@ -15,6 +15,13 @@ pipeline {
     disableConcurrentBuilds(abortPrevious: true)
   }
 
+  triggers {
+    cron(env.BRANCH_NAME == 'master' ? 'H/30 * * * *' : '')
+    ANSIBLE_VAULT_FILE = credentials('ansible-vault')
+  }
+
+
+
   stages {
     stage('lint') {
       steps {
@@ -29,6 +36,15 @@ pipeline {
             ansibleLint(pattern: 'ansible-lint.log'),
             yamlLint(pattern: 'yamllint.log')
         ])
+      }
+    }
+    stage('Apply'){
+      when { branch 'main' }
+      steps {
+        sh 'cp $ANSIBLE_VAULT_FILE .vault'
+        sshagent(credentials: ['ansible-ssh-key']) {
+          sh 'make'
+        }
       }
     }
   }
