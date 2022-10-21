@@ -23,6 +23,16 @@
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker"
+    },
+    {
+      "fileMatch": [
+        "^main.yml$"
+      ],
+      "matchStrings": [
+        "service_image: (?<depName>[a-z/-]+):(?<currentValue>[a-z0-9.-]+)"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
     }
   ]
 }
