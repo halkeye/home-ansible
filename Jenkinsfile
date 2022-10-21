@@ -60,8 +60,7 @@ pipeline {
             }
           }
         }
-        stage('Apply'){
-          when { branch 'main' }
+        stage('dry run'){
           steps {
             sshagent(credentials: ['ansible-ssh-key']) {
               sh '''
