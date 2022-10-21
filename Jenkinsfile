@@ -7,6 +7,7 @@ pipeline {
 
   environment {
     ANSIBLE_VAULT_FILE = credentials('ansible-vault')
+    HOME = "${WORKSPACE}"
   }
 
   options {
@@ -26,6 +27,7 @@ pipeline {
     stage('lint') {
       steps {
         sh '''
+            export PATH="${HOME}/.local/bin:${PATH}"
             pip install -r requirements.txt
 
             set +e
@@ -43,7 +45,7 @@ pipeline {
       steps {
         sh 'cp $ANSIBLE_VAULT_FILE .vault'
         sshagent(credentials: ['ansible-ssh-key']) {
-          sh 'make'
+          sh 'export PATH="${HOME}/.local/bin:${PATH}" && make'
         }
       }
     }
