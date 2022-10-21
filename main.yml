@@ -47,7 +47,7 @@
     - role: linuxserver
       vars:
         service_name: calibre-web
-        service_image: linuxserver/calibre-web:version-0.6.19
+        service_image: linuxserver/calibre-web:0.6.19
         env:
           PUID: '1026'
           PGID: '100'

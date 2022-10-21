@@ -4,32 +4,21 @@
   ],
   "regexManagers": [
     {
-      "fileMatch": [
-        "^roles/.*/tasks/main.yml$"
-      ],
+      "fileMatch": [],
       "matchStrings": [
-        "image: '(?<depName>[a-z/-]+):(?<currentValue>[a-z0-9.-]+)'",
-        "image: (?<depName>[a-z/-]+):(?<currentValue>[a-z0-9.-]+)"
+        "image: \"(?<depName>[a-zA-Z0-9./-]+]+):(?<currentValue>.*)@(?<currentDigest>.*)\""
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker"
     },
     {
       "fileMatch": [
-        "^roles/.*/tasks/main.yml$"
-      ],
-      "matchStrings": [
-        "image: \"(?<depName>[a-z/-]+):(?<currentValue>.*)@(?<currentDigest>.*)\""
-      ],
-      "datasourceTemplate": "docker",
-      "versioningTemplate": "docker"
-    },
-    {
-      "fileMatch": [
+        "^roles/.*/tasks/main.yml$",
         "^main.yml$"
       ],
       "matchStrings": [
-        "service_image: (?<depName>[a-z/-]+):(?<currentValue>[a-z0-9.-]+)"
+        "image: ['\"]?(?<depName>[a-zA-Z0-9./-]+)):(?<currentValue>[a-z0-9.-]+)['\"]?",
+        "service_image: ['\"]?(?<depName>[a-zA-Z0-9./-]+):(?<currentValue>.*)['\"]?"
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker"
