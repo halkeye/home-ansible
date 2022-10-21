@@ -4,7 +4,9 @@
   ],
   "regexManagers": [
     {
-      "fileMatch": [],
+      "fileMatch": [
+        "^roles/.*/tasks/main.yml$"
+      ],
       "matchStrings": [
         "image: \"(?<depName>[a-zA-Z0-9./-]+]+):(?<currentValue>.*)@(?<currentDigest>.*)\""
       ],
