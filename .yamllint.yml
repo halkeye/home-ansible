@@ -1,7 +1,5 @@
 ---
-ignore: |
-  venv/
-  .local/
+ignore-from-file: [.gitignore]
 
 extends: default
 

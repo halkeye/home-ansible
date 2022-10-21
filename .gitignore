@@ -6,3 +6,5 @@ vars.json
 ansible-lint.log
 yamllint.log
 roles/adoptopenjdk_role/
+venv/
+.local/
