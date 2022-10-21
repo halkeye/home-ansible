@@ -23,23 +23,54 @@ pipeline {
     cron(env.BRANCH_NAME == 'master' ? 'H/30 * * * *' : '')
   }
 
-
-
   stages {
-    stage('lint') {
+    stage('Install Dependancies') {
       steps {
         sh '''
             export PATH="${HOME}/.local/bin:${PATH}"
             pip install -r requirements.txt
-
-            set +e
-            yamllint -c .yamllint.yml -f parsable . | tee yamllint.log
-            ansible-lint -p --offline | tee ansible-lint.log
-          '''
-        recordIssues(tools: [
-            ansibleLint(pattern: 'ansible-lint.log'),
-            yamlLint(pattern: 'yamllint.log')
-        ])
+            '''
+      }
+    }
+    stage('Lint') {
+      parallel {
+        stage('yamllint') {
+          steps {
+            sh '''
+                export PATH="${HOME}/.local/bin:${PATH}"
+                yamllint -c .yamllint.yml -f parsable . | tee yamllint.log
+              '''
+          }
+          post {
+            always {
+              recordIssues(tools: [yamlLint(pattern: 'yamllint.log')])
+            }
+          }
+        }
+        stage('ansible-lint') {
+          steps {
+            sh '''
+                export PATH="${HOME}/.local/bin:${PATH}"
+                ansible-lint -p --offline | tee ansible-lint.log
+              '''
+          }
+          post {
+            always {
+              recordIssues(tools: [ansibleLint(pattern: 'ansible-lint.log')])
+            }
+          }
+        }
+        stage('Apply'){
+          when { branch 'main' }
+          steps {
+            sshagent(credentials: ['ansible-ssh-key']) {
+              sh '''
+                export PATH="${HOME}/.local/bin:${PATH}"
+                make ANSIBLE_VAULT_FILE=${ANSIBLE_VAULT_FILE} ANSIBLE_DEBUG="--check"
+              '''
+            }
+          }
+        }
       }
     }
     stage('Apply'){
