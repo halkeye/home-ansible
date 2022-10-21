@@ -17,7 +17,7 @@
         "^main.yml$"
       ],
       "matchStrings": [
-        "image: ['\"]?(?<depName>[a-zA-Z0-9./-]+)):(?<currentValue>[a-z0-9.-]+)['\"]?",
+        "image: ['\"]?(?<depName>[a-zA-Z0-9./-]+):(?<currentValue>[a-z0-9.-]+)['\"]?",
         "service_image: ['\"]?(?<depName>[a-zA-Z0-9./-]+):(?<currentValue>.*)['\"]?"
       ],
       "datasourceTemplate": "docker",
