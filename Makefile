@@ -1,7 +1,8 @@
 #!make
 .DEFAULT_GOAL := run
 
-ANSIBLE_PLAYBOOK := ansible-playbook -i inventory --vault-password-file .vault
+ANSIBLE_VAULT_FILE := .vault
+ANSIBLE_PLAYBOOK := ansible-playbook -i inventory --vault-password-file $(ANSIBLE_VAULT_FILE)
 ANSIBLE_DEBUG :=
 PLAYBOOK := main
 
