@@ -44,7 +44,7 @@ pipeline {
       when { branch 'main' }
       steps {
         sshagent(credentials: ['ansible-ssh-key']) {
-          sh 'export PATH="${HOME}/.local/bin:${PATH}" && make'
+          sh 'export PATH="${HOME}/.local/bin:${PATH}" && make ANSIBLE_VAULT_FILE=${ANSIBLE_VAULT_FILE}'
         }
       }
     }
