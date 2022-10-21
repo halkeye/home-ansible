@@ -6,6 +6,7 @@ pipeline {
   }
 
   environment {
+    ANSIBLE_VAULT_FILE = credentials('ansible-vault')
   }
 
   options {
@@ -17,7 +18,6 @@ pipeline {
 
   triggers {
     cron(env.BRANCH_NAME == 'master' ? 'H/30 * * * *' : '')
-    ANSIBLE_VAULT_FILE = credentials('ansible-vault')
   }
 
 
