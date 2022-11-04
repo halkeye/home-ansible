@@ -6,3 +6,9 @@ http:
       entryPoints:
         - websecure
       service: "syncthing@docker"
+    books:
+      rule: 'Host(`books.g4v.dev`)'
+      tls: {}
+      entryPoints:
+        - websecure
+      service: "calibre-web@docker"
