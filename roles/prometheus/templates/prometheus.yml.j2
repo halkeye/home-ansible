@@ -1,0 +1,29 @@
+global:
+  scrape_interval:     1m
+  evaluation_interval: 1m
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          group: 'prometheus'
+  - job_name: traefik
+    metrics_path: /metrics
+    static_configs:
+    - targets: ['treafik.nas.g4v.dev:8080']
+  - job_name: node
+    scheme: https
+    metrics_path: /metrics
+    static_configs:
+    - targets: ['node-exporter.nas.g4v.dev']
+  - job_name: nut-synology
+    scheme: https
+    metrics_path: /ups_metrics
+    static_configs:
+    - targets: ['nut-exporter.nas.g4v.dev']
+  - job_name: nut-exporter
+    scheme: https
+    metrics_path: /metrics
+    static_configs:
+    - targets: ['nut-exporter.nas.g4v.dev']

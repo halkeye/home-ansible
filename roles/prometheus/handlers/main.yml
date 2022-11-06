@@ -1,0 +1,12 @@
+---
+# handlers file for prometheus
+- name: 'Restart prometheus'
+  community.docker.docker_container:
+    name: 'prometheus'
+    restart: yes
+- name: 'Reload prometheus'
+  uri:
+    url: https://prometheus.nas.g4v.dev/-/reload
+    method: POST
+    body: ""
+

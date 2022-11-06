@@ -1,0 +1,6 @@
+---
+# handlers file for node-exporter
+- name: 'Restart node-exporter'
+  community.docker.docker_container:
+    name: 'node-exporter'
+    restart: yes

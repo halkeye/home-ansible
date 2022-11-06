@@ -1,0 +1,6 @@
+---
+# handlers file for nut-exporter
+- name: 'Restart nut-exporter'
+  community.docker.docker_container:
+    name: 'nut-exporter'
+    restart: yes

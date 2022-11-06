@@ -50,6 +50,7 @@
     ports:
       - 80:80
       - 443:443
+      - 8080:8080
     env:
       CF_API_KEY: '{{ cloudflare_api_key }}'
       CF_API_EMAIL: '{{ cloudflare_email }}'

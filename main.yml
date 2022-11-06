@@ -54,6 +54,13 @@
         volumes:
           - '{{media_base_dir}}/Books:/books'
     - role: stash
+      tags: stash
+    - role: prometheus
+      tags: prometheus
+    - role: node-exporter
+      tags: node-exporter
+    - role: nut-exporter
+      tags: nut-exporter
 
 - hosts: thor
   gather_facts: False
