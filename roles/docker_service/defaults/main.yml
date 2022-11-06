@@ -11,3 +11,4 @@ ports: []
 service_image: ' missing service image'
 service_name: 'missing service name'
 capabilities: []
+default_host_ip: ""

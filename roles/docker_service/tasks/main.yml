@@ -34,5 +34,6 @@
     restart_policy: unless-stopped
     user: '{{ docker_user }}'
     volumes: '{{ ["/etc/localtime:/etc/localtime:ro"] + volumes }}'
+    default_host_ip: '{{ default_host_ip }}'
   notify:
     - Restart {{ service_name }}
