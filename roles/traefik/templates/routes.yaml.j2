@@ -12,3 +12,9 @@ http:
       entryPoints:
         - websecure
       service: "calibre-web@docker"
+    logs:
+      rule: 'Host(`logs.nas.g4v.dev`)'
+      tls: {}
+      entryPoints:
+        - websecure
+      service: "dozzle@docker"
