@@ -1,0 +1,17 @@
+---
+# tasks file for exportarr
+- include_role:
+    name: docker_service
+  vars:
+    service_name: '{{ item.type }}_exportarr'
+    #service_image: ghcr.io/onedr0p/exportarr:v1.1.0
+    service_image: ghcr.io/onedr0p/exportarr:master
+    docker_user: ""
+    docker_groups: []
+    env:
+      URL: '{{ item.url }}'
+      APIKEY: '{{ item.apikey }}'
+    command:
+      - '{{ item.type }}'
+    labels: "{{ [{ 'key': 'traefik.http.services.' + item.type + '_exportarr.loadbalancer.server.port', 'value': '9707'}] | items2dict }}"
+  with_items: "{{ services }}"

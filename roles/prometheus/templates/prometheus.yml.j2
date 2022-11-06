@@ -27,3 +27,13 @@ scrape_configs:
     metrics_path: /metrics
     static_configs:
     - targets: ['nut-exporter.nas.g4v.dev']
+{% for service in exportarr_services %}
+  - job_name: {{ service.type }}
+    scheme: https
+    metrics_path: /metrics
+    static_configs:
+    - targets: ['{{ service.type }}-exportarr.nas.g4v.dev']
+      labels:
+        meta: exportarr
+        exportarr: '{{ service.type }}'
+{% endfor %}

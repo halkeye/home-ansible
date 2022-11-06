@@ -1,0 +1,6 @@
+---
+# defaults file for exportarr
+services: []
+  #- type: 'sonarr'
+  #  apikey: 'apikey'
+  #  url: 'https://sonarr:1234/'

@@ -61,6 +61,10 @@
       tags: node-exporter
     - role: nut-exporter
       tags: nut-exporter
+    - role: exportarr
+      vars:
+        services: "{{ exportarr_services }}"
+      tags: exportarr
 
 - hosts: thor
   gather_facts: False
