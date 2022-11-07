@@ -27,7 +27,7 @@
     owner: '{{ docker_uid }}'
     group: '{{ docker_gid }}'
   notify:
-    - Reload prometheus
+    - Restart prometheus
 
 #- name: prometheus rules dir
 #  become: true

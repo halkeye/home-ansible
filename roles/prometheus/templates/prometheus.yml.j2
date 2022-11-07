@@ -27,6 +27,12 @@ scrape_configs:
     metrics_path: /metrics
     static_configs:
     - targets: ['nut-exporter.nas.g4v.dev']
+  - job_name: blocky
+    metrics_path: /metrics
+    static_configs:
+    - targets:
+      - 'thor:4000'
+      - 'synologynas:4000'
 {% for service in exportarr_services %}
   - job_name: {{ service.type }}
     scheme: https

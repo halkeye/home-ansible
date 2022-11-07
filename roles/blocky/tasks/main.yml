@@ -32,3 +32,5 @@
         - 4000:4000
         - 53:53/udp
         - 53:53/tcp
+    labels:
+      "traefik.http.services.blocky.loadbalancer.server.port": "4000"
