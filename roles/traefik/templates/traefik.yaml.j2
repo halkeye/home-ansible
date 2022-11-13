@@ -45,6 +45,7 @@ entryPoints:
           - main: "{{ tailscale_hostname }}"
             sans:
               - "*.{{ tailscale_hostname }}"
+          - main: "books.g4v.dev"
 api: {}
 certificatesResolvers:
   cloudflare:
