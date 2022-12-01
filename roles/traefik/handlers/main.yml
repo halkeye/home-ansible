@@ -1,6 +1,7 @@
 ---
 # handlers file for traefik
 - name: 'Restart traefik'
-  community.docker.docker_container:
-    name: 'traefik'
-    restart: yes
+  shell: "echo noop"
+#  community.docker.docker_container:
+#    name: 'traefik'
+#    restart: yes
