@@ -14,6 +14,11 @@ http:
       tls: {}
       entryPoints:
         - websecure
+        - web
+      middlewares:
+        - test-redirectscheme
+        - xscheme
+      service: "syncthing@docker"
     books:
       rule: 'Host(`books.g4v.dev`)'
       tls: {}
@@ -29,4 +34,8 @@ http:
       tls: {}
       entryPoints:
         - websecure
+        - web
+      middlewares:
+        - test-redirectscheme
+        - xscheme
       service: "dozzle@docker"
