@@ -1,0 +1,31 @@
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: '{{ docker_config_dir }}/{{ service_name }}'
+    state: directory
+    mode: '0777'
+    owner: '{{ docker_uid }}'
+    group: '{{ docker_gid }}'
+  notify:
+    - Restart {{ service_name }}
+
+- name: setup {{ service_name }} specific volumes
+  set_fact:
+    hotio_config_volumes:
+      - '{{ docker_config_dir }}/{{ service_name }}:{{ config_path }}'
+
+- name: merge common and {{ service_name }} volumes
+  set_fact:
+    hotio_volumes: "{{ media_directories + hotio_config_volumes }}"
+  notify:
+    - Restart {{ service_name }}
+
+- name: '{{ service_name }}'
+  community.docker.docker_container:
+    name: '{{ service_name }}'
+    image: '{{ service_image }}'
+    env: '{{ { "TZ": "America/Vancouver", "PUID": "{{ docker_uid }}", "GUID": "{{ docker_gid }}", "UMASK": "002" } | combine(env) }}'
+    volumes: '{{ hotio_volumes }}'
+    restart_policy: unless-stopped
+    labels:
+      traefik.enable: 'true'
+
