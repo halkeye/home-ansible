@@ -55,6 +55,13 @@
           PGID: '100'
         volumes:
           - '{{media_base_dir}}/Books:/books'
+    - role: linuxserver
+      vars:
+        service_name: heimdall
+        service_image: linuxserver/heimdall:2.5.5
+        #env:
+        #  PUID: '1026'
+        #  PGID: '100'
     - role: stash
       tags: stash
     - role: prometheus

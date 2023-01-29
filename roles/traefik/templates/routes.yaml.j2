@@ -39,3 +39,13 @@ http:
         - test-redirectscheme
         - xscheme
       service: "dozzle@docker"
+    dash:
+      rule: 'Host(`dash.nas.g4v.dev`)'
+      tls: {}
+      entryPoints:
+        - websecure
+        - web
+      middlewares:
+        - test-redirectscheme
+        - xscheme
+      service: "heimdall@docker"
