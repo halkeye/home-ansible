@@ -13,6 +13,6 @@
     name: docker_service
   vars:
     service_name: overseerr
-    service_image: ghcr.io/sct/overseerr:1.32.4
+    service_image: ghcr.io/sct/overseerr:1.32.5
     volumes:
       - '{{ docker_config_dir }}/overseerr:/app/config'
