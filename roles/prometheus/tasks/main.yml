@@ -53,7 +53,7 @@
     name: docker_service
   vars:
     service_name: prometheus
-    service_image: quay.io/prometheus/prometheus:v2.41.0
+    service_image: quay.io/prometheus/prometheus:v2.42.0
     docker_user: "{{ docker_uid }}"
     docker_groups:
       - "{{ docker_gid }}"
