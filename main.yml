@@ -40,7 +40,7 @@
     - role: hotio
       vars:
         service_name: prowlarr
-        service_image: cr.hotio.dev/hotio/prowlarr:testing-1.0.1.2220
+        service_image: cr.hotio.dev/hotio/prowlarr:testing-1.1.2.2453
       tags: prowlarr
     - role: arrs
       vars:
