@@ -14,6 +14,7 @@
       tags: whoami
     # Plex
     - role: plex
+      tags: plex
     # downloaders
     - role: nzbget
     - role: qbittorrent
