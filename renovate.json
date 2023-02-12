@@ -4,7 +4,12 @@
   ],
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
       "automerge": true
     }
   ],
@@ -14,7 +19,8 @@
         "^roles/.*/tasks/main.yml$"
       ],
       "matchStrings": [
-        "image: \"(?<depName>[a-zA-Z0-9./-]+]+):(?<currentValue>.*)@(?<currentDigest>.*)\""
+        "image: \"(?<depName>[a-zA-Z0-9./-]+]+):(?<currentValue>.*)@(?<currentDigest>.*)\"",
+        "image: \"(?<depName>[a-zA-Z0-9./-]+]+):(?<currentValue>[^@]+)\""
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker"
