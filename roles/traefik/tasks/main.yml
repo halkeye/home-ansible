@@ -32,7 +32,7 @@
 - name: Traefik
   community.docker.docker_container:
     name: traefik
-    image: traefik:v2.9.6
+    image: traefik:v2.9.7
     restart_policy: unless-stopped
     pull: yes
     state: started
