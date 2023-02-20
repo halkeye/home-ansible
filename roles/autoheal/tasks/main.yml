@@ -14,7 +14,7 @@
     #  - sh
     #  - -x
     #  - /docker-entrypoint
-    env:
-      AUTOHEAL_CONTAINER_LABEL: all
+    #env:
+    #  AUTOHEAL_CONTAINER_LABEL: all
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

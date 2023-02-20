@@ -17,6 +17,8 @@
       OPENVPN_CONFIG: '{{ qbittorrent.openvpn.config }}'
       OPENVPN_PROVIDER: '{{ qbittorrent.openvpn.provider }}'
       LAN: 172.16.10.0/24
+    labels:
+      autoheal: "true"
     capabilities:
       - NET_ADMIN
     healthcheck:
