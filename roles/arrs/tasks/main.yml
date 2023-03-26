@@ -28,6 +28,7 @@
       TZ: "America/Vancouver"
     volumes: '{{ arr_volumes }}'
     restart_policy: unless-stopped
+    exposed_ports: '{{ exposed_ports }}'
     labels:
       traefik.enable: 'true'
 

@@ -24,25 +24,29 @@
     # Media Finders
     - role: overseerr
     - role: arrs
+      tags: arrs
       vars:
         service_name: bazarr
-        service_image: "ghcr.io/k8s-at-home/bazarr:v1.1.2"
+        service_image: "ghcr.io/onedr0p/bazarr:1.2.0"
+        exposed_ports: [6767]
     - role: arrs
+      tags: arrs
       vars:
         service_name: sonarr
-        service_image: "ghcr.io/k8s-at-home/sonarr:v3.0.9.1549"
+        service_image: "ghcr.io/onedr0p/sonarr:3.0.9.1549"
+        exposed_ports: [8989]
     - role: arrs
+      tags: arrs
       vars:
         service_name: radarr
-        service_image: "ghcr.io/k8s-at-home/radarr:v4.3.2.6857"
+        service_image: "ghcr.io/onedr0p/radarr:4.3.2.6857"
+        exposed_ports: [7878]
     - role: arrs
+      tags: arrs
       vars:
         service_name: lidarr
-        service_image: "ghcr.io/k8s-at-home/lidarr:v1.0.2.2592"
-    - role: arrs
-      vars:
-        service_name: readarr
-        service_image: "ghcr.io/k8s-at-home/readarr:v0.1.1.1352"
+        service_image: "ghcr.io/onedr0p/lidarr:1.0.2.2592"
+        exposed_ports: [8686]
     - role: linuxserver
       vars:
         service_name: calibre-web
