@@ -1,4 +1,9 @@
 http:
+  services:
+    octoprint:
+      loadBalancer:
+        servers:
+          - url: "http://octopi.dhcp.home:80"
   middlewares:
     test-redirectscheme:
       redirectScheme:
@@ -9,6 +14,16 @@ http:
         customRequestHeaders:
           X-Scheme: "https"
   routers:
+    octoprint:
+      rule: Host(`octopi.nas.g4v.dev`)
+      tls: {}
+      entryPoints:
+        - websecure
+        - web
+      middlewares:
+        - test-redirectscheme
+        - xscheme
+      service: octoprint
     tailscale-syncthings:
       rule: 'Host(`syncthing.{{ tailscale_hostname }}`)'
       tls: {}
