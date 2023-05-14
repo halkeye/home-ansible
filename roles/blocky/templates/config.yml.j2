@@ -26,6 +26,8 @@ prometheus:
 httpPort: 4000
 blocking:
   blackLists:
+    easylist:
+      - https://easylist.to/easylist/easylist.txt
     ads:
       - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
       - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
@@ -36,7 +38,34 @@ blocking:
       - |
         # inline definition with YAML literal block scalar style
         # hosts format
-        someadsdomain.com
+        # from https://d3ward.github.io/toolz/adblock.html
+        ad.doubleclick.net
+        afs.googlesyndication.com
+        adfstat.yandex.ru
+        ads-api.tiktok.com
+        ads-api.twitter.com
+        ads.pinterest.com
+        ads.tiktok.com
+        ads.youtube.com
+        advertising-api-eu.amazon.com
+        analyticsengine.s3.amazonaws.com
+        analytics.s3.amazonaws.com
+        api-adservices.apple.com
+        appmetrica.yandex.ru
+        business-api.tiktok.com
+        ck.ads.oppomobile.com
+        grs.hicloud.com
+        log.byteoversea.com
+        log.fc.yahoo.com
+        m.doubleclick.net
+        mediavisor.doubleclick.net
+        metrika.yandex.ru
+        pagead2.googlesyndication.com
+        static.doubleclick.net
+        stats.g.doubleclick.net
+        udcm.yahoo.com
+        udc.yahoo.com
+        widgets.pinterest.com
   whiteLists:
     ads:
       - https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
@@ -51,4 +80,5 @@ blocking:
         analytics.google.com
   clientGroupsBlock:
     default:
+      - easylist
       - ads
