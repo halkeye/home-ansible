@@ -24,8 +24,8 @@
   vars:
     service_name: blocky
     service_image: spx01/blocky
-    docker_user: "blocky"
-    docker_groups: []
+    docker_user: "{{ docker_uid }}"
+    docker_groups: ['{{ docker_gid }}']
     volumes:
         - '{{docker_config_dir}}/blocky/config.yml:/app/config.yml'
     ports:
