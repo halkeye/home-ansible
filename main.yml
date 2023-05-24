@@ -48,6 +48,12 @@
         service_name: lidarr
         service_image: "ghcr.io/onedr0p/lidarr:1.1.4.3027"
         exposed_ports: [8686]
+    - role: arrs
+      tags: arrs
+      vars:
+        service_name: readarr
+        service_image: "ghcr.io/onedr0p/readarr-develop:0.1.5.1832"
+        exposed_ports: [8787]
     - role: linuxserver
       vars:
         service_name: calibre-web
