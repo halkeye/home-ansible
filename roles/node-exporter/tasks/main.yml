@@ -3,7 +3,7 @@
     name: docker_service
   vars:
     service_name: node-exporter
-    service_image: prom/node-exporter:v1.5.0
+    service_image: prom/node-exporter:v1.6.0
     docker_user: "{{ docker_uid }}"
     docker_groups:
       - "{{ docker_gid }}"
