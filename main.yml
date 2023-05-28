@@ -40,7 +40,7 @@
       tags: arrs
       vars:
         service_name: radarr
-        service_image: "ghcr.io/onedr0p/radarr:4.4.4.7068"
+        service_image: "ghcr.io/onedr0p/radarr:4.5.2.7388"
         exposed_ports: [7878]
     - role: arrs
       tags: arrs
