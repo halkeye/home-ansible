@@ -1,7 +1,7 @@
 - name: netbootxyz
   community.docker.docker_container:
     name: netbootxyz
-    image: "lscr.io/linuxserver/netbootxyz@sha256:dc2561ee009e47ab46bfef43eca043ae5ccb83d014a4d09ce47b3c755d088945"
+    image: "lscr.io/linuxserver/netbootxyz@sha256:bad31533ea3be467abfbb13951fbecca11500974bbf730455c995f769850b6fa"
     state: started
     env:
       PUID: "1000"
