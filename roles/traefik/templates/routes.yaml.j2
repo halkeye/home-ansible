@@ -34,16 +34,6 @@ http:
         - test-redirectscheme
         - xscheme
       service: "syncthing@docker"
-    books:
-      rule: 'Host(`books.g4v.dev`)'
-      tls: {}
-      entryPoints:
-        - websecure
-        - web
-      middlewares:
-        - test-redirectscheme
-        - xscheme
-      service: "calibre-web@docker"
     logs:
       rule: 'Host(`logs.nas.g4v.dev`)'
       tls: {}
