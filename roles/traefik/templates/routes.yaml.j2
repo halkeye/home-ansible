@@ -4,6 +4,10 @@ http:
       loadBalancer:
         servers:
           - url: "http://octopi.dhcp.home:80"
+    synology:
+      loadBalancer:
+        servers:
+          - url: "http://172.16.10.10:5000"
   middlewares:
     test-redirectscheme:
       redirectScheme:
@@ -24,6 +28,16 @@ http:
         - test-redirectscheme
         - xscheme
       service: octoprint
+    synology:
+      rule: Host(`nas.g4v.dev`)
+      tls: {}
+      entryPoints:
+        - websecure
+        - web
+      middlewares:
+        - test-redirectscheme
+        - xscheme
+      service: synology
     tailscale-syncthings:
       rule: 'Host(`syncthing.{{ tailscale_hostname }}`)'
       tls: {}
