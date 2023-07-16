@@ -52,7 +52,7 @@
       tags: arrs
       vars:
         service_name: readarr
-        service_image: "ghcr.io/onedr0p/readarr-develop:0.2.2.1943"
+        service_image: "ghcr.io/onedr0p/readarr-develop:0.2.3.1955"
         exposed_ports: [8787]
     - role: linuxserver
       vars:
