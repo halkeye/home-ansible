@@ -1,0 +1,74 @@
+name: Run
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  SOPS_AGE_KEY_FILE: ${{ github.workspace }}/.sops.age.keyfile.txt
+  SSH_HOST_KEY: |-
+    [100.87.25.75]:4022 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDCjsm6RaYAoc0emqBl8UJqMOs266ouWdz1oA+q26TMbJIWocAF/tMEh1AyPR7sedK48bdk5a03oVPCjIP/rDUwta8Af4hEF84mbcdtI7woEYJKQrPDE1a6INe37UDUgMS7mvdoYqFay3zUzzMxOAR3piumgg7+dKovOFeF69T9opeQ1q6nfkw0uZLS95c04/VVO5b+umV1oHNWak4ebCsn3xAWUoTFZhhiCqIyqCNVokhOMTQmRTIuHH39r1JDVOaFztb/WdNJNxjCyA31wbPMSfykk15KVw1yA3cjS4bQUeR2uBMMc8CRYip70R2BB1eG76FJjP0kYwbE/e2F0+MSd/OkL9Z/Pp7rpV9heO+BipyPadE7tLMKxbRpGv9eUA2dp5vE9wwkrth1dxuQfVCdIJNyMy2stCa0nvFpcdnLckaxiVXVmXVkGqcNXmBs/DqsDGGOIQKuX7klX6sBQnAZWZDz35kYFEdebo9ifzhVO1GmueQFZRwqrHrouGdVC8U=
+    [100.87.25.75]:4022 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIObrCFEkIaimwqFCHtP0/HbZ1ETiAh6aYgE5pq7uvS4
+    [100.87.25.75]:4022 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPRi+m+p0h68q5h4MTo4CUK8Lm3KrZVmJiYXPNCzdN8aR4eyz8rz8+yZkUf3qLLgFXambLB69VaYAPOxz/PNmjs=
+    100.118.24.15 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGkPAUgoR9+zaZzo23m3lav+aHe8qZo2BjeJqjPqjDxJdRGEUYppnX4OUZxr92ac6HIARE5mVPqPJCdheZxiLHc=
+    100.118.24.15 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINqHfmi5jAqW6N8CvLG02x9ZfHvpQWsirtQFOrY3hE05
+    100.118.24.15 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD8TOFWtyDQ9E+8Olm309N0spvzJdfTT7VeUDoA09ypqal5DpmyTHHpYuRRyEnykG/ZOY2TrSWFhHikicTKCdIvCd9MuJ4qKFB01yvXV+LVaXw7eKohQNtUvTxQJizLIYlM7eUGvRqDPQt6FaGgsNimrAcv8/IPUbNjyKiwLg+l8ES5O1BpMzfO8lbPYJDv3SMFIqU1yLFuu0ya8CNbwAB0cxi/TLmw9K/dizmR3MihezKc0qo//iVBxDKY05RwFJHqESklYiLHFPjU0EeKlNOChdszimkHH1LkSegx/ZHHgxzo8cEIzrMJilEWtVUFHzj6+/FHrqkMggG4ajoNpxYAZdM5/2UvNmoJ4BvkS1DkISOBAbKSkH57aqEKjuT7mcCkdCFd/XH2egFrdKIuwkkstmXY49ZVq8xBQ/g5xBmU78Ze0GaioAieWkc0MiE/zYGOlp325TVUG+pKCcV6mMrbmWDqnM5OIDQgv4hc/r0mjN5Fay0tY1XDhgK8yO8o4YE=
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tailscale
+        uses: tailscale/github-action@main
+        with:
+          oauth-client-id: ${{ secrets.TAILSCALE_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TAILSCALE_CLIENT_SECRET }}
+          tags: tag:github-runner
+
+      - uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.10
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: 🚀 Run yamllint
+        uses: frenck/action-yamllint@v1
+
+      - name: write sops age file
+        env:
+          SOPS_AGE_CONTENTS: ${{ secrets.SOPS_AGE_KEY_FILE }}
+        run: |
+          echo "$SOPS_AGE_CONTENTS" > $SOPS_AGE_KEY_FILE
+
+      - name: Add the host key
+        run: |
+          mkdir ~/.ssh
+          chmod 700 ~/.ssh
+          echo "$SSH_HOST_KEY" >> ~/.ssh/known_hosts
+
+      - uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.TERRAFORM_SSH_KEY }}
+
+      - name: Sops Binary Installer
+        uses: mdgreenwald/mozilla-sops-action@v1.4.1
+
+      - name: Test ansible
+        if: github.event_name == 'pull_request'
+        run: |
+          make ANSIBLE_VAULT_FILE=${ANSIBLE_VAULT_FILE} ANSIBLE_DEBUG="--check"
+
+      - name: Run ansible
+        if: "github.event_name != 'pull_request'"
+        run: |
+          make ANSIBLE_VAULT_FILE=${ANSIBLE_VAULT_FILE}
