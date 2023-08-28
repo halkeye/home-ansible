@@ -17,7 +17,7 @@ env:
     100.118.24.15 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGkPAUgoR9+zaZzo23m3lav+aHe8qZo2BjeJqjPqjDxJdRGEUYppnX4OUZxr92ac6HIARE5mVPqPJCdheZxiLHc=
     100.118.24.15 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINqHfmi5jAqW6N8CvLG02x9ZfHvpQWsirtQFOrY3hE05
     100.118.24.15 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD8TOFWtyDQ9E+8Olm309N0spvzJdfTT7VeUDoA09ypqal5DpmyTHHpYuRRyEnykG/ZOY2TrSWFhHikicTKCdIvCd9MuJ4qKFB01yvXV+LVaXw7eKohQNtUvTxQJizLIYlM7eUGvRqDPQt6FaGgsNimrAcv8/IPUbNjyKiwLg+l8ES5O1BpMzfO8lbPYJDv3SMFIqU1yLFuu0ya8CNbwAB0cxi/TLmw9K/dizmR3MihezKc0qo//iVBxDKY05RwFJHqESklYiLHFPjU0EeKlNOChdszimkHH1LkSegx/ZHHgxzo8cEIzrMJilEWtVUFHzj6+/FHrqkMggG4ajoNpxYAZdM5/2UvNmoJ4BvkS1DkISOBAbKSkH57aqEKjuT7mcCkdCFd/XH2egFrdKIuwkkstmXY49ZVq8xBQ/g5xBmU78Ze0GaioAieWkc0MiE/zYGOlp325TVUG+pKCcV6mMrbmWDqnM5OIDQgv4hc/r0mjN5Fay0tY1XDhgK8yO8o4YE=
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,16 +31,16 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python
         uses: actions/setup-python@v3
         with:
-          python-version: 3.10
+          python-version: "3.10"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          
+
       - name: 🚀 Run yamllint
         uses: frenck/action-yamllint@v1
 
@@ -62,6 +62,11 @@ jobs:
 
       - name: Sops Binary Installer
         uses: mdgreenwald/mozilla-sops-action@v1.4.1
+
+      - name: Setup tailscale hosts
+        run: |
+          printf "[thor]\nansible_host=$(tailscale ip --1 thor)\n" >> inventory/hosts
+          printf "[synologynas]\nansible_host=$(tailscale ip --1 synology)\n" >> inventory/hosts
 
       - name: Test ansible
         if: github.event_name == 'pull_request'
