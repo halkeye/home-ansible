@@ -9,4 +9,3 @@
     url: https://prometheus.nas.g4v.dev/-/reload
     method: POST
     body: ""
-

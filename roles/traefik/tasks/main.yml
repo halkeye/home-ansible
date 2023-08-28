@@ -66,4 +66,3 @@
       traefik.http.routers.traefik.tls: 'true'
       traefik.http.routers.traefik.entrypoints: 'websecure'
       traefik.http.routers.traefik.service: 'api@internal'
-

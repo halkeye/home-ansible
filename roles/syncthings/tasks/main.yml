@@ -18,4 +18,3 @@
     restart_policy: unless-stopped
     labels:
       traefik.enable: 'true'
-

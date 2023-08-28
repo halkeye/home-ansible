@@ -3,4 +3,3 @@
   roles:
     - role: adoptopenjdk_role
     - role: jenkins-agent
-

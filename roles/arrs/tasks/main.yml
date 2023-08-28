@@ -31,4 +31,3 @@
     exposed_ports: '{{ exposed_ports }}'
     labels:
       traefik.enable: 'true'
-

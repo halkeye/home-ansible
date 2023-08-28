@@ -22,4 +22,3 @@
     volumes: "{{ builtin_volumes + volumes }}"
     restart_policy: unless-stopped
     labels: '{{ { "traefik.enable": "true" } | combine(labels) }}'
-
