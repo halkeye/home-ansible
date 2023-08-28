@@ -74,12 +74,12 @@
         services: "{{ exportarr_services }}"
       tags: exportarr
 
-- hosts: thor
-  gather_facts: False
-  roles:
-    - role: autoheal
-    - role: blocky
-      tags: blocky
+#- hosts: thor
+#  gather_facts: False
+#  roles:
+#    - role: autoheal
+#    - role: blocky
+#      tags: blocky
 
 #- name: Jenkins agents
 #  import_playbook: jenkins_agents.yml
