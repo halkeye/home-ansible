@@ -58,7 +58,7 @@ jobs:
 
       - uses: webfactory/ssh-agent@v0.8.0
         with:
-          ssh-private-key: ${{ secrets.TERRAFORM_SSH_KEY }}
+          ssh-private-key: ${{ secrets.ANSIBLE_SSH_KEY }}
 
       - name: Sops Binary Installer
         uses: mdgreenwald/mozilla-sops-action@v1.4.1
