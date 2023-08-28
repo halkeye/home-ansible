@@ -50,6 +50,12 @@ jobs:
         run: |
           echo "$SOPS_AGE_CONTENTS" > $SOPS_AGE_KEY_FILE
 
+      - name: write .vault
+        env:
+          ANSIBLE_VAULT: ${{ secrets.ANSIBLE_VAULT }}
+        run: |
+          echo "$ANSIBLE_VAULT" > .vault
+
       - name: Add the host key
         run: |
           mkdir ~/.ssh
@@ -71,9 +77,9 @@ jobs:
       - name: Test ansible
         if: github.event_name == 'pull_request'
         run: |
-          make ANSIBLE_VAULT_FILE=${ANSIBLE_VAULT_FILE} ANSIBLE_DEBUG="--check"
+          make ANSIBLE_DEBUG="--check"
 
       - name: Run ansible
         if: "github.event_name != 'pull_request'"
         run: |
-          make ANSIBLE_VAULT_FILE=${ANSIBLE_VAULT_FILE}
+          make
