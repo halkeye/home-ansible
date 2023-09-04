@@ -9,8 +9,6 @@
     - role: glances
     - role: dozzle
     - role: syncthings
-    - role: netbootxyz
-      tags: netbootxyz
     # debug
     - role: whoami
       tags: whoami
