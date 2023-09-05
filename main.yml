@@ -2,8 +2,6 @@
 - hosts: synologynas
   gather_facts: False
   roles:
-    - role: autoheal
-      tags: autoheal
     - role: traefik
       tags: traefik
     - role: glances
@@ -75,7 +73,6 @@
 #- hosts: thor
 #  gather_facts: False
 #  roles:
-#    - role: autoheal
 #    - role: blocky
 #      tags: blocky
 
