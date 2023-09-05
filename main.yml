@@ -16,8 +16,6 @@
     # downloaders
     - role: nzbget
     - role: qbittorrent
-    - role: blocky
-      tags: blocky
     # Media Finders
     - role: overseerr
     - role: arrs
@@ -69,12 +67,6 @@
       vars:
         services: "{{ exportarr_services }}"
       tags: exportarr
-
-#- hosts: thor
-#  gather_facts: False
-#  roles:
-#    - role: blocky
-#      tags: blocky
 
 #- name: Jenkins agents
 #  import_playbook: jenkins_agents.yml
