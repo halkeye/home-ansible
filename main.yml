@@ -57,8 +57,6 @@
         #  PGID: '100'
     - role: stash
       tags: stash
-    - role: prometheus
-      tags: prometheus
     - role: node-exporter
       tags: node-exporter
     - role: nut-exporter
