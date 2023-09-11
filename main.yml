@@ -2,8 +2,6 @@
 - hosts: synologynas
   gather_facts: False
   roles:
-    - role: traefik
-      tags: traefik
     - role: glances
     - role: dozzle
     - role: syncthings
