@@ -4,7 +4,7 @@
   vars:
     service_name: qbittorrent
       # service_image: guillaumedsde/alpine-qbittorrent-openvpn@sha256:c26e53f3d1f2eb2503b442aa151ad80b044280b5bbd594c8bf95adac322187ce
-    service_image: lscr.io/linuxserver/qbittorrent:latest
+    service_image:  lscr.io/linuxserver/qbittorrent@sha256:2b304d7f91ce15eaf91df168beddf63c063a66596e2dcb295708e94e33d61dfc
     docker_user: ""
     docker_groups: []
     volumes:
