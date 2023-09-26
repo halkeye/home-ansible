@@ -3,7 +3,8 @@
     name: docker_service
   vars:
     service_name: qbittorrent
-    service_image: guillaumedsde/alpine-qbittorrent-openvpn@sha256:c26e53f3d1f2eb2503b442aa151ad80b044280b5bbd594c8bf95adac322187ce
+      # service_image: guillaumedsde/alpine-qbittorrent-openvpn@sha256:c26e53f3d1f2eb2503b442aa151ad80b044280b5bbd594c8bf95adac322187ce
+    service_image: lscr.io/linuxserver/qbittorrent:latest
     docker_user: ""
     docker_groups: []
     volumes:
@@ -12,17 +13,18 @@
     env:
       PUID: '{{ docker_uid | quote }}'
       PGID: '{{ docker_gid | quote }}'
-      OPENVPN_PASSWORD: '{{ qbittorrent.openvpn.password }}'
-      OPENVPN_USERNAME: '{{ qbittorrent.openvpn.username }}'
-      OPENVPN_CONFIG: '{{ qbittorrent.openvpn.config }}'
-      OPENVPN_PROVIDER: '{{ qbittorrent.openvpn.provider }}'
-      LAN: 172.16.10.0/24
+      #OPENVPN_PASSWORD: '{{ qbittorrent.openvpn.password }}'
+      #OPENVPN_USERNAME: '{{ qbittorrent.openvpn.username }}'
+      #OPENVPN_CONFIG: '{{ qbittorrent.openvpn.config }}'
+      #OPENVPN_PROVIDER: '{{ qbittorrent.openvpn.provider }}'
+      #LAN: 172.16.10.0/24
     labels:
       autoheal: "true"
+      "traefik.http.services.qbittorrent.loadbalancer.server.port": "8080"
     capabilities:
       - NET_ADMIN
-    healthcheck:
-      test: ["CMD-SHELL", "healthcheck.sh"]
-      interval: 1s
-      retries: 3
-      start_period: 10s
+    #healthcheck:
+    #  test: ["CMD-SHELL", "healthcheck.sh"]
+    #  interval: 1s
+    #  retries: 3
+    #  start_period: 10s
