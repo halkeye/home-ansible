@@ -21,7 +21,7 @@
       tags: arrs
       vars:
         service_name: bazarr
-        service_image: "ghcr.io/onedr0p/bazarr:1.3.0"
+        service_image: "ghcr.io/onedr0p/bazarr:1.3.1"
         exposed_ports: [6767]
     - role: arrs
       tags: arrs
