@@ -44,7 +44,7 @@
     - role: linuxserver
       vars:
         service_name: heimdall
-        service_image: "linuxserver/heimdall:2.5.7"
+        service_image: "linuxserver/heimdall:2.5.8"
         #env:
         #  PUID: '1026'
         #  PGID: '100'
