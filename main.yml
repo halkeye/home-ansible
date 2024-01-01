@@ -26,12 +26,6 @@
     - role: arrs
       tags: arrs
       vars:
-        service_name: sonarr
-        service_image: "ghcr.io/onedr0p/sonarr:4.0.0.741"
-        exposed_ports: [8989]
-    - role: arrs
-      tags: arrs
-      vars:
         service_name: radarr
         service_image: "ghcr.io/onedr0p/radarr:5.2.6.8376"
         exposed_ports: [7878]
@@ -41,13 +35,6 @@
         service_name: lidarr
         service_image: "ghcr.io/onedr0p/lidarr:2.0.7.3849"
         exposed_ports: [8686]
-    - role: linuxserver
-      vars:
-        service_name: heimdall
-        service_image: "linuxserver/heimdall:2.5.8"
-        #env:
-        #  PUID: '1026'
-        #  PGID: '100'
     - role: stash
       tags: stash
     - role: node-exporter
