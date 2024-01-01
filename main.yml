@@ -27,7 +27,7 @@
       tags: arrs
       vars:
         service_name: sonarr
-        service_image: "ghcr.io/onedr0p/sonarr:3.0.10.1567"
+        service_image: "ghcr.io/onedr0p/sonarr:4.0.0.741"
         exposed_ports: [8989]
     - role: arrs
       tags: arrs
