@@ -6,8 +6,8 @@
     #- role: dozzle
     - role: syncthings
     # debug
-    - role: whoami
-      tags: whoami
+    #- role: whoami
+    #  tags: whoami
     # Plex
     #- role: plex
     #  tags: plex
