@@ -16,12 +16,12 @@
     - role: qbittorrent
       tags: qbittorrent
     # Media Finders
-    - role: arrs
-      tags: arrs
-      vars:
-        service_name: bazarr
-        service_image: "ghcr.io/onedr0p/bazarr:1.4.1"
-        exposed_ports: [6767]
+    #- role: arrs
+    #  tags: arrs
+    #  vars:
+    #    service_name: bazarr
+    #    service_image: "ghcr.io/onedr0p/bazarr:1.4.1"
+    #    exposed_ports: [6767]
     #- role: stash
     #  tags: stash
 #    - role: node-exporter
