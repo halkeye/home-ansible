@@ -2,8 +2,8 @@
 - hosts: synologynas
   gather_facts: False
   roles:
-    - role: glances
-    - role: dozzle
+    #- role: glances
+    #- role: dozzle
     - role: syncthings
     # debug
     - role: whoami
@@ -24,10 +24,10 @@
         exposed_ports: [6767]
     - role: stash
       tags: stash
-    - role: node-exporter
-      tags: node-exporter
-    - role: nut-exporter
-      tags: nut-exporter
+#    - role: node-exporter
+#      tags: node-exporter
+#    - role: nut-exporter
+#      tags: nut-exporter
 
 #- name: Jenkins agents
 #  import_playbook: jenkins_agents.yml
