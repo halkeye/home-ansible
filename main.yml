@@ -4,7 +4,7 @@
   roles:
     #- role: glances
     #- role: dozzle
-    - role: syncthings
+    #- role: syncthings
     # debug
     #- role: whoami
     #  tags: whoami
