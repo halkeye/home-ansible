@@ -1,4 +1,0 @@
-- name: Restart plex
-  community.docker.docker_container:
-    name: 'plex'
-    restart: yes

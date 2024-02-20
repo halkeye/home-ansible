@@ -2,32 +2,7 @@
 - hosts: synologynas
   gather_facts: False
   roles:
-    #- role: glances
-    #- role: dozzle
-    #- role: syncthings
-    # debug
-    #- role: whoami
-    #  tags: whoami
-    # Plex
-    #- role: plex
-    #  tags: plex
     # downloaders
     - role: nzbget
     - role: qbittorrent
       tags: qbittorrent
-    # Media Finders
-    #- role: arrs
-    #  tags: arrs
-    #  vars:
-    #    service_name: bazarr
-    #    service_image: "ghcr.io/onedr0p/bazarr:1.4.2"
-    #    exposed_ports: [6767]
-    #- role: stash
-    #  tags: stash
-#    - role: node-exporter
-#      tags: node-exporter
-#    - role: nut-exporter
-#      tags: nut-exporter
-
-#- name: Jenkins agents
-#  import_playbook: jenkins_agents.yml

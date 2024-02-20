@@ -1,6 +1,0 @@
----
-# handlers file for stash
-- name: 'Restart stash'
-  community.docker.docker_container:
-    name: 'stash'
-    restart: yes

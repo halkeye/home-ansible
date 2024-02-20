@@ -1,4 +1,0 @@
-- name: 'Restart {{ service_name }}'
-  community.docker.docker_container:
-    name: '{{ service_name }}'
-    restart: yes
