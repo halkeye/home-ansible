@@ -67,7 +67,7 @@ jobs:
           ssh-private-key: ${{ secrets.ANSIBLE_SSH_KEY }}
 
       - name: Sops Binary Installer
-        uses: mdgreenwald/mozilla-sops-action@v1.5.0
+        uses: mdgreenwald/mozilla-sops-action@v1.6.0
 
       - name: Setup tailscale hosts
         run: |
